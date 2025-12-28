@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import BaseLayout from "../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
@@ -14,7 +15,6 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
-const base = import.meta.env.BASE_URL;
 
 // Get all trails for the current language
 const allTrails = await getCollection("trails");
@@ -30,13 +30,10 @@ const trails = allTrails
     {trails.map((trail) => {
       const slug = trail.id.split("/").slice(1).join("/");
       const formattedDate = trail.data.date.toLocaleString(lang);
-      // Construct URL with base path
-      const basePath = base === '/' ? '' : base;
-      const trailUrl = `${basePath}/${lang}/trails/${slug}`;
       
       return (
         <li>
-          <a href={trailUrl}>
+          <a href={getRelativeLocaleUrl(lang, `trails/${slug}`)}>
             {trail.data.title}
           </a>
           <span> - {trail.data.number} / 5 • {formattedDate}</span>
