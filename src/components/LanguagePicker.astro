@@ -1,19 +1,28 @@
 ---
 import { languages } from "../i18n/languages";
 
-
+const base = import.meta.env.BASE_URL;
 const pathname = Astro.url.pathname || '/';
 
-const pathFor = (targetLang:string) => {
-    // remove locale prefix (if present)
-    const rest = pathname
-                 .replace(/^\/+/, '')
-                 .split('/')
-                 .filter(Boolean)
-                 .slice(1);
-                 
-    // add current locale prefix
-    return '/' + [targetLang, ...rest].join('/');
+const pathFor = (targetLang: string) => {
+    // Remove base URL from pathname
+    let pathWithoutBase = pathname;
+    if (base !== '/' && pathname.startsWith(base)) {
+        pathWithoutBase = pathname.slice(base.length);
+    }
+    
+    // Remove leading slashes and split into segments
+    const segments = pathWithoutBase.replace(/^\/+/, '').split('/').filter(Boolean);
+    
+    // Remove the current language (first segment) and keep the rest
+    const rest = segments.slice(1);
+    
+    // Reconstruct path: base + targetLang + rest
+    // Ensure base ends without slash, then add components
+    const basePath = base === '/' ? '' : base;
+    const restPath = rest.length > 0 ? '/' + rest.join('/') : '';
+    
+    return `${basePath}/${targetLang}${restPath}`;
 };
 ---
 <ul>
