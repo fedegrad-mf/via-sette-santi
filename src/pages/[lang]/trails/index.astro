@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const allTrails = await getCollection("trails");
+
+  // Get unique languages
+  const languages = [...new Set(allTrails.map((trail) => trail.id.split("/")[0]))];
+
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params;
+
+// Get all trails for the current language
+const allTrails = await getCollection("trails");
+const trails = allTrails
+  .filter((trail) => trail.id.startsWith(`${lang}/`))
+  .sort((a, b) => a.data.number - b.data.number);
+---
+
+<BaseLayout>
+  <h1>Trails</h1>
+  
+  <ul>
+    {trails.map((trail) => {
+      const slug = trail.id.split("/").slice(1).join("/");
+      const formattedDate = trail.data.date.toLocaleString(lang);
+      
+      return (
+        <li>
+          <a href={`/${lang}/trails/${slug}`}>
+            {trail.data.title}
+          </a>
+          <span> - {trail.data.number} / 5 • {formattedDate}</span>
+        </li>
+      );
+    })}
+  </ul>
+</BaseLayout>

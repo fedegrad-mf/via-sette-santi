@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("trails");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return {
+      params: {
+        lang,
+        slug: slug.join("/") || undefined,
+      },
+      props: page,
+    };
+  });
+
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const page = Astro.props;
+const formattedDate = page.data.date.toLocaleString(lang);
+---
+
+<BaseLayout>
+  <pre>{JSON.stringify(Astro.params, null, 2)}</pre>
+  <pre>{page.id}</pre>
+
+  <h1>{page.data.title}</h1>
+  <p>by {page.data.number} / 5 • {formattedDate}</p>
+</BaseLayout>

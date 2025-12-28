@@ -1,0 +1,24 @@
+---
+import LanguagePicker from "../components/LanguagePicker.astro";
+---
+
+<html lang={Astro.currentLocale}>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Via dei Sette Santi</title>
+    </head>
+    <body>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Posts</a>
+            <a href="#">Contact</a>
+        </nav>
+        <slot />
+        <footer>
+          <LanguagePicker />
+        </footer>
+    </body>
+</html>

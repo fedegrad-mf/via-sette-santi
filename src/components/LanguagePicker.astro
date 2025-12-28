@@ -1,0 +1,25 @@
+---
+import { languages } from "../i18n/languages";
+
+
+const pathname = Astro.url.pathname || '/';
+
+const pathFor = (targetLang:string) => {
+    // remove locale prefix (if present)
+    const rest = pathname
+                 .replace(/^\/+/, '')
+                 .split('/')
+                 .filter(Boolean)
+                 .slice(1);
+                 
+    // add current locale prefix
+    return '/' + [targetLang, ...rest].join('/');
+};
+---
+<ul>
+  {Object.entries(languages).map(([lang, label]) => (
+    <li>
+      <a href={pathFor(lang)}>{label}</a>
+    </li>
+  ))}
+</ul>
