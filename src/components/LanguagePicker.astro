@@ -2,23 +2,21 @@
 import { languages } from "../i18n/languages";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
-const pathname = Astro.url.pathname || '/';
+const pathname = Astro.url.pathname || ''; // current path in the URL
+const { lang: currentLang } = Astro.params; // current selected language in the URL
+const baseUrl = import.meta.env.BASE_URL; // base path of the site
 
-const pathFor = (targetLang: string) => {
-    // Remove leading slashes and split into segments
-    const segments = pathname.replace(/^\/+/, '').split('/').filter(Boolean);
-    
-    // Remove the current language (first segment) and keep the rest
-    const rest = segments.slice(1).join('/');
-    
-    // Use Astro's i18n helper to construct the URL
-    return getRelativeLocaleUrl(targetLang, rest);
-};
+// extract the effective current route, removing baseUrl and lang 
+const resourceRoute = pathname.replace(`${baseUrl}/${currentLang}/`, '');
 ---
+<pre>pathname:{pathname}</pre>
+<pre>current-lang:{currentLang}</pre>
+<pre>base-url:{baseUrl}</pre>
+<pre>resource-route:{resourceRoute}</pre>
 <ul>
   {Object.entries(languages).map(([lang, label]) => (
     <li>
-      <a href={pathFor(lang)}>{label}</a>
+      <a href={getRelativeLocaleUrl(lang, resourceRoute)}>{label}</a>
     </li>
   ))}
 </ul>
