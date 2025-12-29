@@ -1,7 +1,35 @@
 ---
 import LanguagePicker from "../components/LanguagePicker.astro";
+import { defaultLang, languages } from "../i18n/languages";
 
-const baseUrl = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname || ''; // current path in the URL
+const { lang: currentLang } = Astro.params; // current selected language in the URL
+const baseUrl = import.meta.env.BASE_URL; // base path of the site
+const siteUrl = import.meta.env.SITE; // domain of the site
+
+Astro.url.toString();
+
+
+// remove lang prefix
+const cleanPath = pathname.replace(
+  new RegExp(`^${baseUrl}/(${Object.keys(languages).join("|")})`),
+  ""
+);
+
+// canonical self-referencing
+const canonical = `${siteUrl}${baseUrl}/${currentLang}${cleanPath}`;
+
+// alternate hreflang links
+const alternates = Object.keys(languages).map(lang => ({
+    hreflang: lang,
+    href: `${siteUrl}${baseUrl}/${lang}${cleanPath}`
+}));
+// x-default SOLO homepage lingua -->
+if(cleanPath === "/")
+    alternates.push({
+        hreflang: "x-default",
+        href: `${siteUrl}${baseUrl}/${defaultLang}/`
+    });
 ---
 
 <html lang={Astro.currentLocale}>
@@ -10,7 +38,20 @@ const baseUrl = import.meta.env.BASE_URL;
         <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+
         <title>Via dei Sette Santi</title>
+
+        <!-- i18n SEO: canonical -->
+        <link rel="canonical" href={canonical} />
+        
+        <!-- i18n SEO: Hreflang (alternate + xdefault) -->
+        {alternates.map(alt => (
+          <link
+            rel="alternate"
+            hreflang={alt.hreflang}
+            href={alt.href}
+          />
+        ))}
     </head>
     <body>
         <nav>
