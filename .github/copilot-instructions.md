@@ -25,11 +25,14 @@ This is a website for "la Via dei Sette Santi" (Path of the Seven Saints), a spi
 - Astro components: PascalCase in imports, but kebab-case filenames acceptable
 - TypeScript/Data files: camelCase for exports, kebab-case for filenames
 
-### Astro Architecture
+### Routing
+- To reference public images use `${import.meta.env.BASE_URL}images/***.jpg` so it works with base URL after deploy
+
+## Astro Architecture
 - Project infrastructure reflects standard Astro best practices and documentation
 - The helper `getResourceRoute` in `src/utils/path.ts` are used to split the current URL and getting the specific resource pathname without base URL and language codes
 
-#### Page Structure
+### Page Structure
 ```
 src/pages/
   ├── index.astro               # Homepage (redirect to language-specific index)
@@ -43,12 +46,12 @@ src/pages/
           └── [...slug].astro   # Feature Contents (pages with dynamic route and Collections)
 ```
 
-#### Common Base Astro Layout
+### Common Base Astro Layout
 - Use a single common base layout for the whole site: `src/layouts/Base.astro`
 - Layout handles common elements: header, footer, navigation, meta tags, i18n setup
 - Layout contains common JavaScript/TypeScript logic for all pages
 
-#### Dynamic Contents with Collections
+### Dynamic Contents with Collections
 - Features pages (trails, saints) use Astro Content Collections for managing dynamic content (see: https://docs.astro.build/en/guides/content-collections/)
 
 ```
@@ -71,7 +74,7 @@ src/
         └── .../       # Other languages supported           
 ```
 
-#### Internationalization (i18n)
+### Internationalization (i18n)
 - Multi-language support is implemented with standard Astro support
 - Supported languages are stored in a single source of truth file: `src/i18n/languages.ts`; other occurrences of language codes should be imported and derived from this file
 - UI translations, texts, and labels can be found in `src/i18n/ui.ts`
@@ -85,11 +88,11 @@ src/
 - `src/components/LanguagePicker.astro` component implements the language switcher, generating correct relative URLs for the current resource in the selected language
 - Relative URLs for i18n are generated with Astro's built-in `getRelativeLocaleUrl(lang, resourcePath)` method (https://docs.astro.build/en/guides/internationalization/#create-links; https://docs.astro.build/en/reference/modules/astro-i18n/#getrelativelocaleurl), so users can change language while staying on the same resource page
 
-### SEO
+## SEO
 - Alternate "hreflang" and Canonical tags to optimize SEO for multi-language setup are generated in the common layout `src/layouts/Base.astro`
 - Site Map for SEO dynamically generated from ``astro.config.mjs`` with i18n support (https://docs.astro.build/en/guides/integrations-guide/sitemap/)
 
-### UI and Graphic Design
+## UI and Graphic Design
 - Use Tailwind following best practices for Astro
 - `global.css` is imported in the main index `src/pages/index.astro`
 - Use themes to customize look and feel and provide dark mode support
