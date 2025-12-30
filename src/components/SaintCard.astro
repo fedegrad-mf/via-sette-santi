@@ -1,0 +1,128 @@
+---
+/**
+ * SaintCard Component
+ * Displays a saint with their basic information
+ */
+
+interface Props {
+  name: string;
+  church: string;
+  location: string;
+  description: string;
+  image?: string;
+  link: string;
+  translations: {
+    learnMore: string;
+  };
+}
+
+const { name, church, location, description, image, link, translations } = Astro.props;
+---
+
+<article class="saint-card">
+  {image && (
+    <div class="saint-card-image">
+      <img src={`${import.meta.env.BASE_URL}images/saints/${image}`} alt={name} loading="lazy" />
+    </div>
+  )}
+  <div class="saint-card-content">
+    <h3 class="saint-card-title">{name}</h3>
+    <p class="saint-card-church">{church}</p>
+    <p class="saint-card-location">📍 {location}</p>
+    <p class="saint-card-description">{description}</p>
+    
+    <a href={link} class="saint-card-link">
+      {translations.learnMore} →
+    </a>
+  </div>
+</article>
+
+<style>
+  .saint-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .saint-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
+  }
+
+  .saint-card-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background-color: var(--color-secondary-100);
+  }
+
+  .saint-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .saint-card:hover .saint-card-image img {
+    transform: scale(1.05);
+  }
+
+  .saint-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
+  }
+
+  .saint-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .saint-card-church {
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .saint-card-location {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .saint-card-description {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .saint-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary-600);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    margin-top: auto;
+    font-size: 0.9375rem;
+  }
+
+  .saint-card-link:hover {
+    color: var(--color-primary-700);
+    gap: 0.75rem;
+  }
+</style>

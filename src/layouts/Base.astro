@@ -87,6 +87,10 @@ if (resourceRoute === "/")
               href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
               class="nav-link">Trails</a
             >
+            <a
+              href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
+              class="nav-link">Saints</a
+            >
             <a href="#" class="nav-link">Contact</a>
           </div>
 
@@ -146,6 +150,10 @@ if (resourceRoute === "/")
             href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
             class="mobile-nav-link">Trails</a
           >
+          <a
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
+            class="mobile-nav-link">Saints</a
+          >
           <a href="#" class="mobile-nav-link">Contact</a>
         </div>
       </nav>
@@ -186,6 +194,15 @@ if (resourceRoute === "/")
                     "/trails"
                   )}
                   class="footer-link">Trails</a
+                >
+              </li>
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(
+                    currentLang ?? defaultLang,
+                    "/saints"
+                  )}
+                  class="footer-link">Saints</a
                 >
               </li>
               <li>

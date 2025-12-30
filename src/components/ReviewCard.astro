@@ -1,0 +1,115 @@
+---
+/**
+ * ReviewCard Component
+ * Displays a user review/testimonial
+ */
+
+interface Props {
+  name: string;
+  date: string;
+  rating: number;
+  text: string;
+  location?: string;
+}
+
+const { name, date, rating, text, location } = Astro.props;
+---
+
+<article class="review-card">
+  <div class="review-header">
+    <div class="review-avatar">
+      {name.charAt(0).toUpperCase()}
+    </div>
+    <div class="review-meta">
+      <h4 class="review-name">{name}</h4>
+      {location && <p class="review-location">{location}</p>}
+      <div class="review-rating">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span class={`star ${i < rating ? 'filled' : ''}`}>★</span>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <p class="review-text">{text}</p>
+  
+  <time class="review-date" datetime={date}>{date}</time>
+</article>
+
+<style>
+  .review-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+  }
+
+  .review-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-hover);
+  }
+
+  .review-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .review-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .review-meta {
+    flex-grow: 1;
+  }
+
+  .review-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .review-location {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .review-rating {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .star {
+    color: var(--color-border);
+    font-size: 1.125rem;
+  }
+
+  .star.filled {
+    color: var(--color-primary-500);
+  }
+
+  .review-text {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .review-date {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+</style>
