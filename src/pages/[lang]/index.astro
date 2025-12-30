@@ -1,8 +1,16 @@
 ---
 // Main index homepage (language-specific)
 
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { languages } from "../../i18n/languages";
+import { useTranslations } from "../../i18n/utils";
 import BaseLayout from "../../layouts/Base.astro";
+import HeroCarousel from "../../components/HeroCarousel.astro";
+import TrailCard from "../../components/TrailCard.astro";
+import SaintCard from "../../components/SaintCard.astro";
+import ReviewCard from "../../components/ReviewCard.astro";
+import BookingSection from "../../components/BookingSection.astro";
 import "../../styles/global.css";
 
 export function getStaticPaths() {
@@ -13,8 +21,327 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof languages);
+
+// Get all trails for this language
+const allTrails = await getCollection("trails", ({ id }) => {
+	return id.startsWith(`${lang}/`);
+});
+const sortedTrails = allTrails.sort((a, b) => a.data.number - b.data.number);
+
+// Get all saints for this language
+const allSaints = await getCollection("saints", ({ id }) => {
+	return id.startsWith(`${lang}/`);
+});
+
+// Sample reviews (in real app, these would come from a database or CMS)
+const sampleReviews = [
+	{
+		name: "Marco Rossi",
+		location: "Milano, Italy",
+		rating: 5,
+		date: "November 2024",
+		text: lang === 'it' 
+			? "Un'esperienza straordinaria! Il cammino offre paesaggi mozzafiato e un'atmosfera di profonda spiritualità. Le chiese sono tutte meravigliose."
+			: "An extraordinary experience! The trail offers breathtaking landscapes and an atmosphere of deep spirituality. The churches are all wonderful."
+	},
+	{
+		name: "Anna Weber",
+		location: "Munich, Germany",
+		rating: 5,
+		date: "October 2024",
+		text: lang === 'de'
+			? "Eine wunderbare spirituelle Reise durch die Berge. Die Gastfreundschaft der Einheimischen und die Schönheit der Natur sind unvergesslich."
+			: "A wonderful spiritual journey through the mountains. The hospitality of the locals and the beauty of nature are unforgettable."
+	},
+	{
+		name: "Sarah Johnson",
+		location: "London, UK",
+		rating: 4,
+		date: "September 2024",
+		text: "Beautiful scenery and well-marked trails. The combination of nature and spirituality makes this trek unique. Highly recommended!"
+	}
+];
+
+// Booking options
+const bookingOptions = [
+	{
+		title: t('booking.individual'),
+		description: t('booking.individualDesc'),
+		features: [
+			lang === 'it' ? 'Mappe e guida dettagliata' : lang === 'de' ? 'Karten und detaillierter Führer' : 'Maps and detailed guide',
+			lang === 'it' ? 'Supporto telefonico 24/7' : lang === 'de' ? '24/7 telefonische Unterstützung' : '24/7 phone support',
+			lang === 'it' ? 'Prenotazione alloggi' : lang === 'de' ? 'Unterkunftsbuchung' : 'Accommodation booking',
+		]
+	},
+	{
+		title: t('booking.group'),
+		description: t('booking.groupDesc'),
+		features: [
+			lang === 'it' ? 'Guida locale esperta' : lang === 'de' ? 'Erfahrener lokaler Führer' : 'Expert local guide',
+			lang === 'it' ? 'Gruppo max 12 persone' : lang === 'de' ? 'Gruppe max. 12 Personen' : 'Group max 12 people',
+			lang === 'it' ? 'Visite guidate alle chiese' : lang === 'de' ? 'Geführte Kirchenbesichtigungen' : 'Guided church visits',
+			lang === 'it' ? 'Assicurazione inclusa' : lang === 'de' ? 'Versicherung inbegriffen' : 'Insurance included',
+		]
+	},
+	{
+		title: t('booking.premium'),
+		description: t('booking.premiumDesc'),
+		features: [
+			lang === 'it' ? 'Guida privata dedicata' : lang === 'de' ? 'Privater Führer' : 'Private dedicated guide',
+			lang === 'it' ? 'Alloggi premium' : lang === 'de' ? 'Premium-Unterkunft' : 'Premium accommodations',
+			lang === 'it' ? 'Tutti i pasti inclusi' : lang === 'de' ? 'Alle Mahlzeiten inklusive' : 'All meals included',
+			lang === 'it' ? 'Transfer bagagli' : lang === 'de' ? 'Gepäcktransfer' : 'Luggage transfer',
+			lang === 'it' ? 'Massaggio dopo trekking' : lang === 'de' ? 'Massage nach dem Wandern' : 'Post-trek massage',
+		]
+	}
+];
 ---
 
 <BaseLayout>
-	<h1>Sette Santi ( {lang} )</h1>
+	<!-- Hero Carousel -->
+	<HeroCarousel 
+		title={t('hero.title')}
+		subtitle={t('hero.subtitle')}
+		ctaText={t('hero.cta')}
+		ctaLink={`#overview`}
+	/>
+
+	<!-- Overview Section -->
+	<section id="overview" class="section-padding">
+		<div class="container-custom">
+			<div class="section-header">
+				<h2 class="section-title">{t('overview.title')}</h2>
+				<p class="section-subtitle">{t('overview.subtitle')}</p>
+			</div>
+
+			<div class="overview-content">
+				<div class="overview-text">
+					<p class="overview-description">{t('overview.description')}</p>
+					
+					<div class="overview-info">
+						<div class="info-item">
+							<strong>{t('overview.location')}:</strong>
+							<span>{t('overview.locationText')}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Trails Section -->
+	<section id="trails" class="section-padding section-alt">
+		<div class="container-custom">
+			<div class="section-header">
+				<h2 class="section-title">{t('trails.title')}</h2>
+				<p class="section-subtitle">{t('trails.subtitle')}</p>
+			</div>
+
+			<div class="trails-grid">
+				{sortedTrails.map((trail) => (
+					<TrailCard
+						number={trail.data.number}
+						title={trail.data.title}
+						description={trail.data.description}
+						distance={trail.data.distance}
+						duration={trail.data.duration}
+						difficulty={trail.data.difficulty}
+						image={trail.data.image}
+						link={getRelativeLocaleUrl(lang, `/trails/${trail.id.split('/').slice(1).join('/')}`)}
+						translations={{
+							distance: t('trails.distance'),
+							duration: t('trails.duration'),
+							difficulty: t('trails.difficulty'),
+							viewDetails: t('trails.viewDetails'),
+							difficultyLabel: t(`trails.difficulty.${trail.data.difficulty}`)
+						}}
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Saints Section -->
+	<section id="saints" class="section-padding">
+		<div class="container-custom">
+			<div class="section-header">
+				<h2 class="section-title">{t('saints.title')}</h2>
+				<p class="section-subtitle">{t('saints.subtitle')}</p>
+			</div>
+
+			<div class="saints-grid">
+				{allSaints.map((saint) => (
+					<SaintCard
+						name={saint.data.name}
+						church={saint.data.church}
+						location={saint.data.location}
+						description={saint.data.description}
+						image={saint.data.image}
+						link={getRelativeLocaleUrl(lang, `/saints/${saint.id.split('/').slice(1).join('/')}`)}
+						translations={{
+							learnMore: t('saints.learnMore')
+						}}
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Reviews Section -->
+	<section id="reviews" class="section-padding section-alt">
+		<div class="container-custom">
+			<div class="section-header">
+				<h2 class="section-title">{t('reviews.title')}</h2>
+				<p class="section-subtitle">{t('reviews.subtitle')}</p>
+			</div>
+
+			<div class="reviews-grid">
+				{sampleReviews.map((review) => (
+					<ReviewCard
+						name={review.name}
+						location={review.location}
+						rating={review.rating}
+						date={review.date}
+						text={review.text}
+					/>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Booking Section -->
+	<section id="booking" class="section-padding">
+		<div class="container-custom">
+			<BookingSection
+				title={t('booking.title')}
+				subtitle={t('booking.subtitle')}
+				options={bookingOptions}
+				contactText={t('booking.contactUs')}
+				contactLink="#"
+			/>
+		</div>
+	</section>
 </BaseLayout>
+
+<style>
+	.section-padding {
+		padding: 4rem 0;
+	}
+
+	@media (max-width: 768px) {
+		.section-padding {
+			padding: 3rem 0;
+		}
+	}
+
+	.section-alt {
+		background-color: var(--color-surface);
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 3rem;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--color-text);
+		margin-bottom: 0.75rem;
+	}
+
+	@media (max-width: 768px) {
+		.section-title {
+			font-size: 2rem;
+		}
+	}
+
+	.section-subtitle {
+		font-size: 1.125rem;
+		color: var(--color-text-muted);
+	}
+
+	.overview-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.overview-text {
+		text-align: center;
+	}
+
+	.overview-description {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		color: var(--color-text);
+		margin-bottom: 2rem;
+	}
+
+	.overview-info {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1.5rem;
+		background-color: var(--color-surface);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+	}
+
+	.info-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		text-align: center;
+	}
+
+	.info-item strong {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+
+	.info-item span {
+		color: var(--color-text-muted);
+	}
+
+	.trails-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.trails-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.saints-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.saints-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.reviews-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 768px) {
+		.reviews-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

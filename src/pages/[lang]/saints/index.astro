@@ -1,0 +1,21 @@
+---
+// Saints index page (listing all saints)
+
+import { languages } from "../../../i18n/languages";
+import BaseLayout from "../../../layouts/Base.astro";
+
+export function getStaticPaths() {
+	return Object.keys(languages).map((lang) => ({
+		params: { lang },
+	}));
+}
+
+const { lang } = Astro.params;
+---
+
+<BaseLayout>
+	<div class="container-custom">
+		<h1>Saints Index ( {lang} )</h1>
+		<p>This page will list all saints.</p>
+	</div>
+</BaseLayout>

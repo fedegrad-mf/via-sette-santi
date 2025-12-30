@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("saints");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return {
+      params: {
+        lang,
+        slug: slug.join("/") || undefined,
+      },
+      props: page,
+    };
+  });
+
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const page = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout>
+  <article class="container-custom" style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
+    <header style="margin-bottom: 2rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{page.data.name}</h1>
+      <p style="font-size: 1.25rem; color: var(--color-text-muted);">{page.data.church}</p>
+      <p style="color: var(--color-text-muted);">📍 {page.data.location}</p>
+      {page.data.feastDay && <p style="color: var(--color-text-muted);">🗓️ Feast Day: {page.data.feastDay}</p>}
+    </header>
+
+    <div class="prose" style="line-height: 1.8;">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose :global(h2) {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(h3) {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(ul) {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+</style>

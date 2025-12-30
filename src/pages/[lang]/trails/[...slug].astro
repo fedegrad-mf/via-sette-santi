@@ -21,13 +21,93 @@ export async function getStaticPaths() {
 
 const { lang, slug } = Astro.params;
 const page = Astro.props;
+const { Content } = await render(page);
 const formattedDate = page.data.date.toLocaleString(lang);
 ---
 
 <BaseLayout>
-  <pre>{JSON.stringify(Astro.params, null, 2)}</pre>
-  <pre>{page.id}</pre>
+  <article class="container-custom" style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem;">
+    <header style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <span style="background-color: var(--color-primary-600); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">
+          {page.data.number}
+        </span>
+        <h1 style="font-size: 2.5rem; margin: 0;">{page.data.title}</h1>
+      </div>
+      
+      <p style="font-size: 1.25rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">{page.data.description}</p>
 
-  <h1>{page.data.title}</h1>
-  <p>by {page.data.number} / 5 • {formattedDate}</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; padding: 1.5rem; background-color: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+        <div>
+          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Distance</div>
+          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.distance}</div>
+        </div>
+        <div>
+          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Duration</div>
+          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.duration}</div>
+        </div>
+        <div>
+          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Difficulty</div>
+          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text); text-transform: capitalize;">{page.data.difficulty}</div>
+        </div>
+        <div>
+          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Elevation</div>
+          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.elevation}</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="prose" style="line-height: 1.8;">
+      <Content />
+    </div>
+
+    {page.data.highlights && page.data.highlights.length > 0 && (
+      <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+        <h3 style="margin-top: 0;">Highlights</h3>
+        <ul style="margin: 0; padding-left: 1.5rem;">
+          {page.data.highlights.map((highlight: string) => (
+            <li style="margin-bottom: 0.5rem; color: var(--color-text);">{highlight}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </article>
 </BaseLayout>
+
+<style>
+  .prose :global(h1) {
+    font-size: 2.25rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(h2) {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(h3) {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .prose :global(ul) {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+</style>
