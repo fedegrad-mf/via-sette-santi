@@ -56,12 +56,14 @@ if (resourceRoute === "/")
 
   <body>
     <nav>
-      <a href={getRelativeLocaleUrl(defaultLang, "")}>Home</a>
-      <a href={getRelativeLocaleUrl(defaultLang, "/trails")}>Trails</a>
+      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}>Home</a>
+      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
+        >Trails</a
+      >
       <a href="#">Contact</a>
-      <a href={getRelativeLocaleUrl(defaultLang, "")}>
+      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}>
         <Image
-          src="/images/logo.svg"
+          src={`${import.meta.env.BASE_URL}/images/logo.svg`}
           alt="Nome del tuo Sito"
           width={60}
           height={60}
