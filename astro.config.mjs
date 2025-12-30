@@ -8,8 +8,10 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fedegrad-asso360.github.io',
-  base: 'via-sette-santi',
+  // site: 'https://fedegrad-asso360.github.io',
+  // base: 'via-sette-santi',
+  site: process.env.SITE || undefined,
+  base: process.env.BASE || undefined,
 
   i18n: {
     defaultLocale: 'en',
@@ -21,6 +23,8 @@ export default defineConfig({
   },
 
   vite: {
+    logLevel: 'info',
+
     plugins: [tailwindcss()]
   },
 
