@@ -7,26 +7,27 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
 const baseUrl = import.meta.env.BASE_URL; // base path of the site
 const siteUrl = import.meta.env.SITE; // domain of the site
 
-Astro.url.toString();
-
 /* current resource user is navigating to */
-const resourceRoute = getResourceRoute(Astro.url.pathname || '');
+const resourceRoute = getResourceRoute(Astro.url.pathname || "");
 
+//#region SEO i18n link tags
 
-// canonical self-referencing
-const canonical = `${siteUrl}${baseUrl}/${currentLang}${resourceRoute}`;
+/** canonical self-referencing */
+const canonicalLink = `${siteUrl}${baseUrl}/${currentLang}${resourceRoute}`;
 
-// alternate hreflang links
-const alternates = Object.keys(languages).map((lang) => ({
+/** alternate hreflang links */
+const alternatesHref = Object.keys(languages).map((lang) => ({
   hreflang: lang,
   href: `${siteUrl}${baseUrl}/${lang}${resourceRoute}`,
 }));
-// x-default SOLO homepage lingua -->
+
+// x-default (added only in homepage) -->
 if (resourceRoute === "/")
-  alternates.push({
+  alternatesHref.push({
     hreflang: "x-default",
     href: `${siteUrl}${baseUrl}/${defaultLang}/`,
   });
+//#endregion
 ---
 
 <html lang={Astro.currentLocale}>
@@ -38,34 +39,26 @@ if (resourceRoute === "/")
 
     <title>Via dei Sette Santi</title>
 
-    <!-- i18n SEO: canonical -->
-    <link rel="canonical" href={canonical} />
+    <!-- #region i18n SEO link tags -->
+    <link rel="canonical" href={canonicalLink} />
 
     <!-- i18n SEO: Hreflang (alternate + xdefault) -->
     {
-      alternates.map((alt) => (
+      alternatesHref.map((alt) => (
         <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
       ))
     }
+    <!-- #endregion -->
   </head>
+
   <body>
     <nav>
       <a href="#">Home</a>
       <a href="#">Posts</a>
       <a href="#">Contact</a>
     </nav>
-    <slot />
 
-    <pre>current-lang:{currentLang}</pre>
-    <pre>base-url:{baseUrl}</pre>
-    <pre>resource-route:{resourceRoute}</pre>
-    <pre>canonical:{canonical}</pre>
-    <pre>astro-url:{Astro.url.toString()}</pre>
-    {
-      alternates.map((alt) => (
-        <pre>alternate-href:{`${alt.href} - ${alt.hreflang}`}</pre>
-      ))
-    }
+    <slot />
 
     <footer>
       <LanguagePicker />
