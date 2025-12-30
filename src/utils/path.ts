@@ -11,5 +11,6 @@ export function getResourceRoute(urlPathname: string) {
   const langs: string = Object.keys(languages).join("|");
 
   // remove baseUrl + language from the pathname to extract the resource path
-  return urlPathname.replace(new RegExp(`^${baseUrl}/(${langs})`), '');
+  // (normalizes multiple slashes when there is no baseUrl)
+  return urlPathname.replace(new RegExp(`^${baseUrl}/*(${langs})`), '');
 }
