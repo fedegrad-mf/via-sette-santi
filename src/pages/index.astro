@@ -5,5 +5,5 @@ import { defaultLang } from "../i18n/languages";
 // Redirect to localized homepage (try to use preferred locale, fallback to default)
 const redirectUrl = getRelativeLocaleUrl(defaultLang, '');
 
-return Astro.redirect(redirectUrl, 302);
+return Astro.redirect(redirectUrl, 301);
 ---
