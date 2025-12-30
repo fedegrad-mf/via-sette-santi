@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import LanguagePicker from "../components/LanguagePicker.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 import { defaultLang, languages } from "../i18n/languages";
 import { getResourceRoute } from "../utils/path";
 import { Image } from "astro:assets";
@@ -55,27 +56,458 @@ if (resourceRoute === "/")
   </head>
 
   <body>
-    <nav>
-      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}>Home</a>
-      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
-        >Trails</a
-      >
-      <a href="#">Contact</a>
-      <a href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}>
-        <Image
-          src={`${import.meta.env.BASE_URL}images/logo.svg`}
-          alt="Via dei Sette Santi"
-          width={60}
-          height={60}
-          loading="lazy"
-        />
-      </a>
-    </nav>
+    <!-- Header / Navigation -->
+    <header class="header">
+      <nav class="nav-container">
+        <div class="nav-content">
+          <!-- Logo -->
+          <a
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
+            class="logo-link"
+            aria-label="Via dei Sette Santi Home"
+          >
+            <Image
+              src={`${import.meta.env.BASE_URL}images/logo.svg`}
+              alt="Via dei Sette Santi"
+              width={48}
+              height={48}
+              loading="eager"
+              class="logo"
+            />
+            <span class="logo-text">Via dei Sette Santi</span>
+          </a>
 
-    <slot />
+          <!-- Desktop Navigation -->
+          <div class="nav-links">
+            <a
+              href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
+              class="nav-link">Home</a
+            >
+            <a
+              href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
+              class="nav-link">Trails</a
+            >
+            <a href="#" class="nav-link">Contact</a>
+          </div>
 
-    <footer>
-      <LanguagePicker />
+          <!-- Actions -->
+          <div class="nav-actions">
+            <ThemeToggle />
+            <button
+              id="mobile-menu-toggle"
+              type="button"
+              class="mobile-menu-button"
+              aria-label="Toggle mobile menu"
+              aria-expanded="false"
+            >
+              <svg
+                id="menu-open-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+              <svg
+                id="menu-close-icon"
+                class="hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+          <a
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
+            class="mobile-nav-link">Home</a
+          >
+          <a
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
+            class="mobile-nav-link">Trails</a
+          >
+          <a href="#" class="mobile-nav-link">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <!-- About Section -->
+          <div class="footer-section">
+            <h3 class="footer-heading">Via dei Sette Santi</h3>
+            <p class="footer-text">
+              A spiritual trekking route through the Sibillini Mountains,
+              connecting seven sacred sanctuaries in the heart of Marche, Italy.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-links">
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
+                  class="footer-link">Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(
+                    currentLang ?? defaultLang,
+                    "/trails"
+                  )}
+                  class="footer-link">Trails</a
+                >
+              </li>
+              <li>
+                <a href="#" class="footer-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Language Picker -->
+          <div class="footer-section">
+            <h3 class="footer-heading">Language</h3>
+            <LanguagePicker />
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+          <p class="footer-copyright">
+            © {new Date().getFullYear()} Via dei Sette Santi. All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
+
+<style>
+  /* ============================================
+     Header Styles
+     ============================================ */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(8px);
+    background-color: color-mix(in srgb, var(--color-background) 95%, transparent);
+  }
+
+  .nav-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  /* Logo */
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: opacity var(--transition-fast);
+  }
+
+  .logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .logo-text {
+      display: inline;
+    }
+  }
+
+  /* Desktop Navigation */
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    transition: color var(--transition-fast);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-600);
+    transition: width var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary-600);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Navigation Actions */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu-button {
+      display: none;
+    }
+  }
+
+  .mobile-menu-button:hover {
+    background-color: var(--color-surface-hover);
+    border-color: var(--color-border-hover);
+  }
+
+  .mobile-menu-button:focus {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  .mobile-nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-nav-link:hover {
+    background-color: var(--color-surface-hover);
+    color: var(--color-primary-600);
+  }
+
+  /* ============================================
+     Main Content
+     ============================================ */
+  .main-content {
+    min-height: calc(100vh - 16rem);
+    padding: 2rem 0;
+  }
+
+  /* ============================================
+     Footer Styles
+     ============================================ */
+  .footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    margin-top: 4rem;
+  }
+
+  .footer-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1rem 1.5rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .footer-text {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-link:hover {
+    color: var(--color-primary-600);
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-copyright {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  /* Utility Classes */
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  /**
+   * Mobile menu toggle script
+   */
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+
+    if (!toggle || !menu || !openIcon || !closeIcon) return;
+
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      
+      toggle.setAttribute('aria-expanded', String(!isExpanded));
+      menu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking on a link
+    const mobileLinks = menu.querySelectorAll('.mobile-nav-link');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Initialize on page load
+  initMobileMenu();
+
+  // Re-initialize on navigation (for SPAs)
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>
