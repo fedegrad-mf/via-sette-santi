@@ -1,5 +1,221 @@
 # Design System - Via dei Sette Santi
 
+## 🎨 Color Palette
+
+### Philosophy
+The color palette is inspired by nature and spirituality, reflecting the sacred journey through the Sibillini Mountains. Colors are drawn from the logo and natural elements of the path.
+
+### Primary Colors
+
+#### Brown/Terra (Earth - from logo)
+Represents the earth, the path, and grounding spiritual connection.
+- `--color-primary-50` through `--color-primary-950`
+- Main: `--color-primary-600` (#8b6647)
+- Use for: Primary buttons, main accents, earthy elements
+
+#### Green/Natura (Nature)
+Symbolizes the natural environment, growth, and life along the trail.
+- `--color-secondary-50` through `--color-secondary-950`
+- Main: `--color-secondary-600` (#2a7f3b)
+- Use for: Success states, nature-related content, growth indicators
+
+#### Sky Blue/Cielo (Sky)
+Evokes the open sky, freedom, and spiritual elevation.
+- `--color-accent-50` through `--color-accent-950`
+- Main: `--color-accent-600` (#0284c7)
+- Use for: Links, info states, sky-related elements
+
+#### Gold/Spirituale (Sacred)
+Represents spirituality, enlightenment, and the sacred nature of the journey.
+- `--color-gold-50` through `--color-gold-950`
+- Main: `--color-gold-600` (#d97706)
+- Use for: Premium features, sacred elements, highlights, special badges
+
+### Semantic Colors
+- `--color-background`: Page background (light/dark mode adaptive)
+- `--color-surface`: Card and elevated surface background
+- `--color-surface-hover`: Hover state for surfaces
+- `--color-text`: Primary text color
+- `--color-text-muted`: Secondary/muted text
+- `--color-border`: Border color
+- `--color-border-hover`: Border hover state
+
+## 🎭 Modern Design Features
+
+### Gradients
+Modern gradient definitions for contemporary look:
+- `--gradient-primary`: Brown earth gradient
+- `--gradient-secondary`: Green nature gradient
+- `--gradient-accent`: Blue sky gradient
+- `--gradient-gold`: Spiritual gold gradient
+- `--gradient-nature`: Multi-color nature gradient (green → blue → gold)
+- `--gradient-spiritual`: Spiritual gradient (brown → gold)
+
+### Glass-morphism
+Modern translucent effects with backdrop blur:
+- Header uses `backdrop-filter: blur(var(--blur-lg))`
+- Semi-transparent backgrounds for elevated feel
+- `--blur-sm`, `--blur-md`, `--blur-lg`, `--blur-xl` available
+
+### Border Radius
+Softer, more modern curves:
+- `--radius-sm`: 0.5rem
+- `--radius-md`: 0.75rem
+- `--radius-lg`: 1rem
+- `--radius-xl`: 1.25rem
+- `--radius-2xl`: 1.5rem (default for cards)
+- `--radius-3xl`: 2rem
+- `--radius-full`: 9999px (circles)
+
+### Shadows
+Natural, softer shadows for depth:
+- `--shadow-sm`: Subtle elevation
+- `--shadow-md`: Standard card shadow
+- `--shadow-lg`: Hover state shadow
+- `--shadow-xl`: High elevation shadow
+- `--shadow-2xl`: Maximum elevation
+- `--shadow-inner`: Inset shadow for depth
+- `--shadow-colored`: Colored shadow for special effects
+
+## 🧩 Components
+
+### Buttons
+
+#### `.btn` Base
+Modern button with gradient hover effect:
+- Rounded corners (`--radius-xl`)
+- Internal gradient overlay on hover
+- Transform on hover (translateY(-2px))
+- 2px border for definition
+
+#### Button Variants
+- `.btn-primary`: Brown earth gradient
+- `.btn-secondary`: Green nature gradient  
+- `.btn-accent`: Blue sky gradient
+- `.btn-gold`: Gold spiritual gradient (dark text)
+- `.btn-outline`: Transparent with border, fills on hover
+
+### Cards
+
+#### `.card-base`
+Modern card with:
+- Gradient background (light → slightly darker)
+- Animated top border (gradient nature bar)
+- Shadow elevation on hover
+- Transform animation (translateY(-4px))
+- Rounded corners (`--radius-2xl`)
+
+#### Card Image
+- Gradient background fallback
+- Overlay darkening on hover
+- Scale transform on hover (1.08)
+- Bottom gradient overlay
+
+#### Card Link
+- Animated arrow (→)
+- Color transition
+- Arrow moves on hover (translateX(4px))
+
+### Badges
+Modern pill-shaped badges:
+- `.badge`: Base badge style
+- `.badge-primary`: Brown/terra theme
+- `.badge-secondary`: Green/nature theme
+- `.badge-accent`: Blue/sky theme
+- `.badge-gold`: Gold gradient sacred theme
+
+### Sections
+
+#### `.section`
+Standard section with responsive padding.
+
+#### `.section-alt`
+Alternate section with:
+- Gradient background (subtle)
+- Top and bottom gradient borders
+- Visual separation between sections
+
+### Typography
+
+#### `.section-title`
+- Bold weight (800)
+- Underline decoration (gradient nature bar)
+- Centered alignment
+
+#### `.page-title`
+- Extra bold (800)
+- Left-aligned gradient underline (spiritual gradient)
+- Larger size (3rem)
+
+### Info Box
+Modern info container:
+- Gradient background
+- Top accent bar (gradient accent)
+- Shadow elevation
+- Rounded corners
+
+## 🎯 Usage Guidelines
+
+### When to Use Each Color
+
+**Primary (Brown):**
+- Main CTA buttons
+- Primary navigation items
+- Trail numbers and identifiers
+- Earth/path related content
+
+**Secondary (Green):**
+- Success messages
+- Nature/environmental features
+- Trail difficulty: Easy
+- Vegetation and flora content
+
+**Accent (Blue):**
+- Links and hyperlinks
+- Info messages
+- Location indicators
+- Sky and weather references
+- Trail difficulty: Hard
+
+**Gold:**
+- Premium/special features
+- Sacred and spiritual content
+- Trail difficulty: Moderate
+- Highlights and featured items
+- Review stars
+
+### Accessibility
+- All color combinations meet WCAG AA standards
+- Dark mode fully supported with `light-dark()` function
+- Focus states clearly visible
+- Text remains readable on all backgrounds
+
+### Animation & Motion
+- Use `--transition-fast` (150ms) for small UI elements
+- Use `--transition-base` (250ms) for most transitions
+- Use `--transition-slow` (350ms) for large movements
+- Transform movements are subtle (2-6px)
+- Hover states enhance without being distracting
+
+## 🌗 Dark Mode
+Automatically adapts using CSS `light-dark()` function:
+- Maintains color harmony in both modes
+- Ensures readability in all conditions
+- Smooth transitions between modes
+- Preserves brand identity
+
+## 📱 Responsive Design
+- Mobile-first approach
+- Breakpoints: 640px, 768px, 1024px, 1280px
+- Grid systems adapt automatically
+- Typography scales fluidly with `clamp()`
+- Touch-friendly targets (minimum 44px)
+
+---
+
+**Last Updated:** December 30, 2025  
+**Version:** 2.0 - Modern Nature-Inspired Redesign
+
 Documentazione del sistema di design scalabile e riutilizzabile del progetto.
 
 ## Principi

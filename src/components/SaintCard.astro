@@ -19,16 +19,22 @@ interface Props {
 const { name, church, location, description, image, link, translations } = Astro.props;
 ---
 
-<article class="card-base">
+<article class="card-base saint-card">
   {image && (
-    <div class="card-image" style="height: 180px;">
+    <div class="card-image" style="height: 200px;">
       <img src={`${import.meta.env.BASE_URL}images/saints/${image}`} alt={name} loading="lazy" />
     </div>
   )}
   <div class="card-content">
     <h3 class="card-title" style="font-size: 1.25rem;">{name}</h3>
-    <p style="color: var(--color-text); font-weight: 500; font-size: 0.9375rem; margin: 0;">{church}</p>
-    <p style="color: var(--color-text-muted); font-size: 0.875rem; margin: 0;">📍 {location}</p>
+    <div class="saint-location">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>{location}</span>
+    </div>
+    <p style="color: var(--color-primary-700); font-weight: 600; font-size: 0.9375rem; margin: 0;">{church}</p>
     <p class="text-muted" style="line-height: 1.6; font-size: 0.9375rem; margin: 0; flex-grow: 1;">{description}</p>
     
     <a href={link} class="card-link" style="font-size: 0.9375rem;">
@@ -36,4 +42,23 @@ const { name, church, location, description, image, link, translations } = Astro
     </a>
   </div>
 </article>
+
+<style>
+  .saint-card:hover {
+    border-color: var(--color-primary-600);
+  }
+
+  .saint-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .saint-location svg {
+    flex-shrink: 0;
+  }
+</style>
 

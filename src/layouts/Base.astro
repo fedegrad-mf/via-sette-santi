@@ -231,17 +231,16 @@ if (resourceRoute === "/")
 
 <style>
   /* ============================================
-     Header Styles
+     Header Styles - Flat with green background
      ============================================ */
   .header {
     position: sticky;
     top: 0;
     z-index: 50;
     width: 100%;
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-    backdrop-filter: blur(8px);
-    background-color: color-mix(in srgb, var(--color-background) 95%, transparent);
+    background-color: var(--color-primary-600);
+    border-bottom: 2px solid var(--color-primary-700);
+    box-shadow: var(--shadow-sm);
   }
 
   .nav-container {
@@ -280,8 +279,8 @@ if (resourceRoute === "/")
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
-    color: var(--color-text);
-    font-weight: 600;
+    color: white;
+    font-weight: 700;
     font-size: 1.125rem;
     transition: opacity var(--transition-fast);
   }
@@ -319,27 +318,28 @@ if (resourceRoute === "/")
   }
 
   .nav-link {
-    color: var(--color-text);
+    color: white;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.9375rem;
-    transition: color var(--transition-fast);
+    transition: all var(--transition-fast);
     position: relative;
+    padding: 0.5rem 0;
   }
 
   .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -0.25rem;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--color-primary-600);
+    background-color: var(--color-gold-400);
     transition: width var(--transition-fast);
   }
 
   .nav-link:hover {
-    color: var(--color-primary-600);
+    color: var(--color-gold-200);
   }
 
   .nav-link:hover::after {
@@ -360,12 +360,12 @@ if (resourceRoute === "/")
     width: 2.5rem;
     height: 2.5rem;
     padding: 0.5rem;
-    background-color: transparent;
-    border: 1px solid var(--color-border);
+    background-color: var(--color-primary-700);
+    border: 2px solid var(--color-primary-800);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-fast);
-    color: var(--color-text);
+    color: white;
   }
 
   @media (min-width: 768px) {
@@ -375,12 +375,11 @@ if (resourceRoute === "/")
   }
 
   .mobile-menu-button:hover {
-    background-color: var(--color-surface-hover);
-    border-color: var(--color-border-hover);
+    background-color: var(--color-primary-800);
   }
 
   .mobile-menu-button:focus {
-    outline: 2px solid var(--color-primary-500);
+    outline: 2px solid var(--color-gold-400);
     outline-offset: 2px;
   }
 
@@ -400,17 +399,17 @@ if (resourceRoute === "/")
   }
 
   .mobile-nav-link {
-    color: var(--color-text);
+    color: white;
     text-decoration: none;
-    font-weight: 500;
-    padding: 0.75rem 1rem;
+    font-weight: 600;
+    padding: 0.875rem 1.25rem;
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
   }
 
   .mobile-nav-link:hover {
-    background-color: var(--color-surface-hover);
-    color: var(--color-primary-600);
+    background-color: var(--color-primary-700);
+    color: var(--color-gold-200);
   }
 
   /* ============================================
@@ -426,9 +425,10 @@ if (resourceRoute === "/")
      ============================================ */
   .footer {
     width: 100%;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    background-color: var(--color-primary-700);
+    border-top: 2px solid var(--color-primary-800);
     margin-top: 4rem;
+    color: white;
   }
 
   .footer-container {
@@ -475,12 +475,12 @@ if (resourceRoute === "/")
   .footer-heading {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: white;
     margin: 0;
   }
 
   .footer-text {
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9375rem;
     line-height: 1.6;
     margin: 0;
@@ -494,24 +494,24 @@ if (resourceRoute === "/")
   }
 
   .footer-link {
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-size: 0.9375rem;
     transition: color var(--transition-fast);
   }
 
   .footer-link:hover {
-    color: var(--color-primary-600);
+    color: var(--color-gold-300);
   }
 
   .footer-bottom {
     padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-primary-600);
     text-align: center;
   }
 
   .footer-copyright {
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.875rem;
     margin: 0;
   }

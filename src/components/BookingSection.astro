@@ -57,9 +57,17 @@ const { title, subtitle, options, contactText, contactLink } = Astro.props;
 </section>
 
 <style>
+  .booking-card {
+    position: relative;
+  }
+
   .booking-card:hover {
     border-color: var(--color-primary-500);
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-4px);
+  }
+
+  .booking-card .btn-outline:hover {
+    background-color: var(--color-primary-600);
+    color: white;
+    border-color: var(--color-primary-600);
   }
 </style>

@@ -90,22 +90,21 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background-color: var(--color-primary-700);
+    border: 2px solid var(--color-primary-800);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-fast);
-    color: var(--color-text);
+    color: white;
     font-size: 0.9375rem;
   }
 
   .language-button:hover {
-    background-color: var(--color-surface-hover);
-    border-color: var(--color-border-hover);
+    background-color: var(--color-primary-800);
   }
 
   .language-button:focus {
-    outline: 2px solid var(--color-primary-500);
+    outline: 2px solid var(--color-gold-400);
     outline-offset: 2px;
   }
 
@@ -137,11 +136,11 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
-    min-width: 10rem;
+    min-width: 11rem;
     background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     z-index: 50;
     overflow: hidden;
   }
@@ -149,14 +148,14 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
   .language-list {
     list-style: none;
     margin: 0;
-    padding: 0.25rem;
+    padding: 0.5rem;
   }
 
   .language-option {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.625rem 0.75rem;
+    padding: 0.75rem 0.875rem;
     color: var(--color-text);
     text-decoration: none;
     border-radius: var(--radius-md);
@@ -169,13 +168,11 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
   }
 
   .language-option.active {
-    background-color: color-mix(
-      in srgb,
-      var(--color-primary-600) 10%,
-      transparent
-    );
-    color: var(--color-primary-600);
-    font-weight: 500;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    font-weight: 600;
+    border-left: 3px solid var(--color-primary-600);
+    padding-left: calc(0.875rem - 3px);
   }
 
   .language-flag {
@@ -187,7 +184,7 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
   }
 
   .check-icon {
-    color: var(--color-primary-600);
+    color: var(--color-accent-600);
   }
 
   .hidden {

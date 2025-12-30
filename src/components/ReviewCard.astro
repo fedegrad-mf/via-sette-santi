@@ -51,15 +51,16 @@ const { name, date, rating, text, location } = Astro.props;
   .review-avatar {
     width: 3rem;
     height: 3rem;
-    border-radius: var(--radius-full);
-    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+    border-radius: var(--radius-lg);
+    background-color: var(--color-primary-600);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     flex-shrink: 0;
+    border: 2px solid var(--color-primary-200);
   }
 
   .review-meta {
@@ -77,6 +78,6 @@ const { name, date, rating, text, location } = Astro.props;
   }
 
   .star.filled {
-    color: var(--color-primary-500);
+    color: var(--color-gold-500);
   }
 </style>

@@ -5,51 +5,71 @@
    ============================================ */
 
 @theme {
-  /* Color Palette */
-  --color-primary-50: #fef7ee;
-  --color-primary-100: #fdecd3;
-  --color-primary-200: #fbd6a5;
-  --color-primary-300: #f8b96d;
-  --color-primary-400: #f59332;
-  --color-primary-500: #f2760e;
-  --color-primary-600: #e35b04;
-  --color-primary-700: #bc4207;
-  --color-primary-800: #95340e;
-  --color-primary-900: #792c0f;
-  --color-primary-950: #411405;
+  /* ============================================
+     Trail Color Palette - Dark Mode Optimized
+     Green (Primary/Natura) - Brown (Secondary/Terra) - Sky Blue (Accent/Cielo) - Gold (Spiritual)
+     ============================================ */
+  
+  /* Primary: Trail Green #5a8a6b (main brand color) */
+  --color-primary-50: #f2f9f5;
+  --color-primary-100: #e1f1e8;
+  --color-primary-200: #c4e3d2;
+  --color-primary-300: #9bcfb4;
+  --color-primary-400: #6eb490;
+  --color-primary-500: #5a8a6b;
+  --color-primary-600: #4a7558;
+  --color-primary-700: #3d5f48;
+  --color-primary-800: #334d3b;
+  --color-primary-900: #2b4032;
+  --color-primary-950: #18251e;
 
-  --color-secondary-50: #f6f7f9;
-  --color-secondary-100: #eceef2;
-  --color-secondary-200: #d5dae2;
-  --color-secondary-300: #b1bac9;
-  --color-secondary-400: #8696ab;
-  --color-secondary-500: #677991;
-  --color-secondary-600: #526078;
-  --color-secondary-700: #434e62;
-  --color-secondary-800: #3a4353;
-  --color-secondary-900: #343b47;
-  --color-secondary-950: #23272f;
+  /* Secondary: Trail Brown #5e3b20 (earth tones) */
+  --color-secondary-50: #faf7f5;
+  --color-secondary-100: #f5ede6;
+  --color-secondary-200: #e8d6c7;
+  --color-secondary-300: #d4b299;
+  --color-secondary-400: #b8855f;
+  --color-secondary-500: #9d6d48;
+  --color-secondary-600: #7d5538;
+  --color-secondary-700: #5e3b20;
+  --color-secondary-800: #4d311b;
+  --color-secondary-900: #3d2716;
+  --color-secondary-950: #24170d;
 
-  --color-accent-50: #f0fdf4;
-  --color-accent-100: #dcfce7;
-  --color-accent-200: #bbf7d0;
-  --color-accent-300: #86efac;
-  --color-accent-400: #4ade80;
-  --color-accent-500: #22c55e;
-  --color-accent-600: #16a34a;
-  --color-accent-700: #15803d;
-  --color-accent-800: #166534;
-  --color-accent-900: #14532d;
-  --color-accent-950: #052e16;
+  /* Accent: Trail Sky #87a8c3 (highlights) */
+  --color-accent-50: #f5f9fc;
+  --color-accent-100: #ebf2f8;
+  --color-accent-200: #d2e3ef;
+  --color-accent-300: #aacce2;
+  --color-accent-400: #87a8c3;
+  --color-accent-500: #6b8fae;
+  --color-accent-600: #577493;
+  --color-accent-700: #485f78;
+  --color-accent-800: #3d4f63;
+  --color-accent-900: #344252;
+  --color-accent-950: #222a35;
 
-  /* Semantic Colors */
-  --color-background: light-dark(#ffffff, #0f172a);
-  --color-surface: light-dark(#f8fafc, #1e293b);
-  --color-surface-hover: light-dark(#f1f5f9, #334155);
-  --color-text: light-dark(#0f172a, #f1f5f9);
-  --color-text-muted: light-dark(#64748b, #94a3b8);
-  --color-border: light-dark(#e2e8f0, #334155);
-  --color-border-hover: light-dark(#cbd5e1, #475569);
+  /* Gold: Trail Gold #d4af37 (spiritual accents) */
+  --color-gold-50: #fdfbf3;
+  --color-gold-100: #faf5e0;
+  --color-gold-200: #f4e8b8;
+  --color-gold-300: #edd685;
+  --color-gold-400: #e4bf51;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b89127;
+  --color-gold-700: #956e22;
+  --color-gold-800: #7a5823;
+  --color-gold-900: #684923;
+  --color-gold-950: #3c2712;
+
+  /* Semantic Colors - Light & Dark Mode Optimized */
+  --color-background: light-dark(#f8faf9, #1a1f1c);
+  --color-surface: light-dark(#ffffff, #222822);
+  --color-surface-hover: light-dark(#ebf5ef, #2d3630);
+  --color-text: light-dark(#1a1f1c, #e8f0ed);
+  --color-text-muted: light-dark(#5a6f5f, #9db5a8);
+  --color-border: light-dark(#d4e5db, #3d4a42);
+  --color-border-hover: light-dark(#b8d4c3, #4a7558);
 
   /* Typography Scale */
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -81,19 +101,39 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
 
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
+  /* Border Radius - Modern, softer curves */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
   --radius-full: 9999px;
 
-  /* Shadows */
+  /* Shadows - Minimal and flat */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 2px 4px 0 rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 4px 6px 0 rgb(0 0 0 / 0.07);
+  --shadow-xl: 0 6px 10px 0 rgb(0 0 0 / 0.08);
+  --shadow-2xl: 0 8px 16px 0 rgb(0 0 0 / 0.1);
+  --shadow-inner: inset 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  
+  /* Gradient Shadows - For modern card effects */
+  --shadow-colored: 0 10px 30px -5px rgb(var(--shadow-color) / 0.15);
+  
+  /* Modern Gradient Definitions */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary-400) 0%, var(--color-secondary-600) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-400) 0%, var(--color-accent-600) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--color-gold-400) 0%, var(--color-gold-600) 100%);
+  --gradient-nature: linear-gradient(135deg, var(--color-secondary-400) 0%, var(--color-accent-400) 50%, var(--color-gold-400) 100%);
+  --gradient-spiritual: linear-gradient(135deg, var(--color-primary-300) 0%, var(--color-gold-400) 100%);
+  
+  /* Backdrop Blur */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -168,6 +208,7 @@ body {
     padding: 5rem 0;
     display: flex;
     justify-content: center;
+    position: relative;
   }
 
   @media (max-width: 1024px) {
@@ -183,7 +224,9 @@ body {
   }
 
   .section-alt {
-    background-color: var(--color-surface);
+    background-color: light-dark(#f2f9f5, #1c221f);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
   }
 
   /* Section Header Utilities */
@@ -213,9 +256,9 @@ body {
   /* Typography Utilities */
   .section-title {
     font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
+    font-weight: 800;
+    color: var(--color-primary-700);
+    margin-bottom: 1rem;
     line-height: 1.2;
   }
 
@@ -233,9 +276,9 @@ body {
 
   .page-title {
     font-size: 3rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 1rem;
+    font-weight: 800;
+    color: var(--color-primary-700);
+    margin-bottom: 1.5rem;
     line-height: 1.2;
   }
 
@@ -296,8 +339,8 @@ body {
     padding: 2rem;
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--color-border);
+    border-left: 4px solid var(--color-primary-600);
   }
 
   @media (max-width: 768px) {
@@ -358,37 +401,39 @@ body {
     margin-top: 0.125rem;
   }
 
-  /* Card Utilities */
+  /* Card Utilities - Flat style */
   .card-base {
     background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all var(--transition-base);
+    transition: all var(--transition-fast);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   .card-base:hover {
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-border-hover);
+    border-color: var(--color-primary-500);
+    box-shadow: var(--shadow-sm);
   }
 
   .card-image {
     width: 100%;
     overflow: hidden;
-    background-color: var(--color-secondary-100);
+    background-color: var(--color-secondary-50);
+    position: relative;
   }
 
   .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    transition: opacity var(--transition-fast);
   }
 
   .card-base:hover .card-image img {
-    transform: scale(1.05);
+    opacity: 0.92;
   }
 
   .card-content {
@@ -406,13 +451,12 @@ body {
     color: var(--color-primary-600);
     text-decoration: none;
     font-weight: 600;
-    transition: all var(--transition-fast);
+    transition: color var(--transition-fast);
     margin-top: auto;
   }
 
   .card-link:hover {
     color: var(--color-primary-700);
-    gap: 0.75rem;
   }
 
   /* Description Text Utility */
@@ -421,6 +465,51 @@ body {
     line-height: 1.8;
     color: var(--color-text);
     margin-bottom: 2rem;
+  }
+
+  /* Modern Badge Utility */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-xl);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid;
+  }
+
+  .badge-primary {
+    background: light-dark(
+      rgb(167 124 82 / 0.1),
+      rgb(167 124 82 / 0.2)
+    );
+    color: var(--color-primary-700);
+    border-color: var(--color-primary-300);
+  }
+
+  .badge-secondary {
+    background: light-dark(
+      rgb(90 138 107 / 0.1),
+      rgb(90 138 107 / 0.2)
+    );
+    color: var(--color-primary-700);
+    border-color: var(--color-primary-300);
+  }
+
+  .badge-accent {
+    background: light-dark(
+      rgb(2 132 199 / 0.1),
+      rgb(2 132 199 / 0.2)
+    );
+    color: var(--color-accent-700);
+    border-color: var(--color-accent-300);
+  }
+
+  .badge-gold {
+    background-color: var(--color-gold-100);
+    color: var(--color-gold-800);
+    border-color: var(--color-gold-400);
   }
 }
 
@@ -433,13 +522,13 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-2) var(--spacing-4);
+    padding: var(--spacing-3) var(--spacing-6);
     font-size: var(--font-size-base);
-    font-weight: 500;
-    border-radius: var(--radius-md);
+    font-weight: 600;
+    border-radius: var(--radius-lg);
     transition: all var(--transition-fast);
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
   }
 
   .btn-primary {
@@ -464,6 +553,28 @@ body {
     border-color: var(--color-secondary-700);
   }
 
+  .btn-accent {
+    background-color: var(--color-accent-600);
+    color: white;
+    border-color: var(--color-accent-600);
+  }
+
+  .btn-accent:hover {
+    background-color: var(--color-accent-700);
+    border-color: var(--color-accent-700);
+  }
+
+  .btn-gold {
+    background-color: var(--color-gold-500);
+    color: white;
+    border-color: var(--color-gold-500);
+  }
+
+  .btn-gold:hover {
+    background-color: var(--color-gold-600);
+    border-color: var(--color-gold-600);
+  }
+
   .btn-outline {
     background-color: transparent;
     color: var(--color-text);
@@ -472,7 +583,8 @@ body {
 
   .btn-outline:hover {
     background-color: var(--color-surface-hover);
-    border-color: var(--color-border-hover);
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-700);
   }
 
   .card {

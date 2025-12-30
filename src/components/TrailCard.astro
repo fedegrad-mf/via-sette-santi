@@ -25,9 +25,9 @@ interface Props {
 const { number, title, description, distance, duration, difficulty, image, link, translations } = Astro.props;
 
 const difficultyColors = {
-  easy: 'var(--color-accent-600)',
-  moderate: 'var(--color-primary-600)',
-  hard: 'var(--color-secondary-700)'
+  easy: 'var(--color-secondary-600)',
+  moderate: 'var(--color-gold-600)',
+  hard: 'var(--color-accent-700)'
 };
 ---
 
@@ -66,37 +66,40 @@ const difficultyColors = {
 </article>
 
 <style>
+  .trail-card {
+    position: relative;
+  }
+
   .trail-card:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-4px);
-    border-color: var(--color-primary-500);
+    border-color: var(--color-primary-600);
   }
 
   .trail-number {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: var(--color-primary-600);
+    top: 1.25rem;
+    left: 1.25rem;
+    background-color: var(--color-gold-500);
     color: white;
-    width: 3rem;
-    height: 3rem;
-    border-radius: var(--radius-full);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
     z-index: 10;
-    box-shadow: var(--shadow-lg);
+    border: 3px solid white;
   }
 
   .trail-stats {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-    background-color: color-mix(in srgb, var(--color-surface-hover) 50%, transparent);
-    border-radius: var(--radius-md);
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background-color: var(--color-primary-50);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--color-primary-200);
   }
 
   .trail-stat {
