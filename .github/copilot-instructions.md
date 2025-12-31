@@ -120,7 +120,6 @@ src/
 
 #### Sections
 - `.section` - Standard section with responsive padding (5rem → 4rem → 3rem)
-- `.section-alt` - Section with alternate background (`--color-surface`)
 - `.section-header` - Centered section header container
 
 #### Typography
@@ -179,21 +178,6 @@ src/
 </BaseLayout>
 ```
 
-### Grid Layout Pattern
-```astro
-<section class="section section-alt">
-  <div class="container-custom">
-    <div class="section-header">
-      <h2 class="section-title">Section Title</h2>
-      <p class="section-subtitle">Section description</p>
-    </div>
-    
-    <div class="grid-auto-fill" style="--grid-min-width: 350px;">
-      {items.map(item => <Card {...item} />)}
-    </div>
-  </div>
-</section>
-```
 
 ### Card Component Pattern
 ```astro

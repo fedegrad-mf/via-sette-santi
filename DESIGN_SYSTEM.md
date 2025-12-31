@@ -129,11 +129,6 @@ Modern pill-shaped badges:
 #### `.section`
 Standard section with responsive padding.
 
-#### `.section-alt`
-Alternate section with:
-- Gradient background (subtle)
-- Top and bottom gradient borders
-- Visual separation between sections
 
 ### Typography
 
@@ -279,15 +274,6 @@ Sezione principale con padding verticale responsive.
   <div class="container-custom">
     <!-- Contenuto sezione -->
   </div>
-</section>
-```
-
-#### `.section-alt`
-Sezione con sfondo alternativo (usa `--color-surface`).
-
-```astro
-<section class="section section-alt">
-  <!-- Contenuto -->
 </section>
 ```
 
@@ -575,7 +561,7 @@ Tutte le variabili sono definite in `src/styles/global.css` nel blocco `@theme`.
 ### Lista di Card
 
 ```astro
-<section class="section section-alt">
+<section>
   <div class="container-custom">
     <div class="section-header">
       <h2 class="section-title">I Nostri Trail</h2>
@@ -609,7 +595,7 @@ Tutte le variabili sono definite in `src/styles/global.css` nel blocco `@theme`.
 ## Best Practices
 
 1. **Usa sempre le utility classes quando disponibili** invece di creare CSS custom
-2. **Combina le classi** per costruire layout complessi (es: `section section-alt`)
+2. **Combina le classi** per costruire layout complessi
 3. **Personalizza con CSS variables** inline quando necessario (es: `--grid-min-width`)
 4. **Crea CSS custom solo per stili veramente specifici** del componente
 5. **Mantieni la coerenza**: usa sempre gli stessi spacing, colori, font-size

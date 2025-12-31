@@ -238,12 +238,6 @@
     }
   }
 
-  .section-alt {
-    background-color: light-dark(#f2f9f5, #1c221f);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-  }
-
   /* Section Header Utilities */
   .section-header {
     text-align: center;

@@ -31,7 +31,7 @@ export interface Props {
 const { title, subtitle, reviews, class: className } = Astro.props;
 ---
 
-<section id="reviews" class:list={["section", "section-alt", className]}>
+<section id="reviews" class:list={["section", className]}>
 	<div class="container-custom section-content-center">
 		<div class="section-header">
 			<h2 class="section-title">{title}</h2>
