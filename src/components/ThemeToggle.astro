@@ -96,6 +96,7 @@
   /**
    * Theme management script
    * Handles theme switching and persistence
+   * Supports multiple instances of the toggle button
    */
 
   const STORAGE_KEY = 'via-sette-santi-theme';
@@ -120,16 +121,16 @@
     html.style.colorScheme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
 
-    // Update icon visibility
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    // Update ALL icon instances (for multiple toggle buttons)
+    const lightIcons = document.querySelectorAll('#theme-toggle-light-icon');
+    const darkIcons = document.querySelectorAll('#theme-toggle-dark-icon');
 
     if (theme === 'dark') {
-      lightIcon?.classList.remove('hidden');
-      darkIcon?.classList.add('hidden');
+      lightIcons.forEach(icon => icon?.classList.remove('hidden'));
+      darkIcons.forEach(icon => icon?.classList.add('hidden'));
     } else {
-      lightIcon?.classList.add('hidden');
-      darkIcon?.classList.remove('hidden');
+      lightIcons.forEach(icon => icon?.classList.add('hidden'));
+      darkIcons.forEach(icon => icon?.classList.remove('hidden'));
     }
   }
 
@@ -143,13 +144,16 @@
   function initTheme() {
     const theme = getThemePreference();
     setTheme(theme);
+
+    // Listen for ALL button clicks (for multiple toggle buttons)
+    const toggleButtons = document.querySelectorAll('#theme-toggle');
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', toggleTheme);
+    });
   }
 
   // Run on page load
   initTheme();
-
-  // Listen for button click
-  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
 
   // Listen for system preference changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

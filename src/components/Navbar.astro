@@ -7,28 +7,28 @@ import { Image } from "astro:assets";
 const { lang: currentLang } = Astro.params; // current selected language in the URL
 ---
 
-<header class="header">
-  <nav class="nav-container">
-    <div class="nav-content">
-      <!-- Logo (left-aligned) -->
+<header class="sticky top-0 z-50 w-full bg-primary-600 border-b-2 border-primary-700 shadow-lg">
+  <nav class="w-full max-w-screen mx-auto px-2 sm:px-4 lg:px-6">
+    <div class="flex justify-between items-center py-3">
+      <!-- Logo (left-aligned, well visible) -->
       <a
         href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
-        class="logo-link"
+        class="flex items-center gap-2 no-underline transition-opacity duration-200 flex-shrink-0 hover:opacity-80"
         aria-label="Via dei Sette Santi Home"
       >
         <Image
           src={`${import.meta.env.BASE_URL}images/logo.svg`}
           alt="Via dei Sette Santi"
-          width={72}
-          height={72}
+          width={56}
+          height={56}
           loading="eager"
-          class="logo"
+          class="h-12 sm:h-14 w-auto"
         />
       </a>
 
       <!-- Desktop Navigation + Actions (right-aligned) -->
-      <div class="nav-right">
-        <div class="nav-links">
+      <div class="flex items-center gap-4 lg:gap-6">
+        <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
           <a
             href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
             class="nav-link">Home</a
@@ -45,48 +45,34 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
         </div>
 
         <!-- Actions -->
-        <div class="nav-actions">
-          <div class="theme-toggle-desktop">
+        <div class="flex items-center gap-3">
+          <div class="hidden md:block">
             <ThemeToggle />
           </div>
           <button
             id="mobile-menu-toggle"
             type="button"
-            class="mobile-menu-button"
+            class="md:hidden inline-flex items-center justify-center w-10 h-10 text-white hover:text-gold-400 transition-colors duration-200 focus:outline-none focus:text-gold-400"
             aria-label="Toggle mobile menu"
             aria-expanded="false"
           >
             <svg
               id="menu-open-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              class="w-6 h-6"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              viewBox="0 0 24 24"
             >
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
             <svg
               id="menu-close-icon"
-              class="hidden"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+              class="w-6 h-6 hidden"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              viewBox="0 0 24 24"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
@@ -94,139 +80,44 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
     </div>
 
     <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="mobile-menu hidden">
-      <a
-        href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
-        class="mobile-nav-link">Home</a
-      >
-      <a
-        href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
-        class="mobile-nav-link">Trails</a
-      >
-      <a
-        href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
-        class="mobile-nav-link">Saints</a
-      >
-      <a href="#" class="mobile-nav-link">Contact</a>
-      
-      <!-- Theme Toggle in mobile menu -->
-      <div class="mobile-theme-toggle">
-        <ThemeToggle />
+    <div id="mobile-menu" class="hidden md:hidden mt-3 pb-4 border-t border-white/10">
+      <div class="flex flex-col space-y-2 pt-3">
+        <a
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "")}
+          class="text-white no-underline font-semibold py-2 px-2 rounded-md transition-colors duration-200 hover:bg-primary-700 hover:text-gold-200">Home</a
+        >
+        <a
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/trails")}
+          class="text-white no-underline font-semibold py-2 px-2 rounded-md transition-colors duration-200 hover:bg-primary-700 hover:text-gold-200">Trails</a
+        >
+        <a
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
+          class="text-white no-underline font-semibold py-2 px-2 rounded-md transition-colors duration-200 hover:bg-primary-700 hover:text-gold-200">Saints</a
+        >
+        <a href="#" class="text-white no-underline font-semibold py-2 px-2 rounded-md transition-colors duration-200 hover:bg-primary-700 hover:text-gold-200">Contact</a>
+        
+        <!-- Theme Toggle in mobile menu -->
+        <div class="pt-2 border-t border-white/10">
+          <div class="flex justify-center py-2">
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
     </div>
   </nav>
 </header>
 
 <style>
-  /* ============================================
-     Header Styles
-     ============================================ */
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    width: 100%;
-    background-color: var(--color-primary-600);
-    border-bottom: 2px solid var(--color-primary-700);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .nav-container {
-    width: 100%;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .nav-container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .nav-container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-
-  .nav-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 5rem;
-    gap: 2rem;
-  }
-
-  /* Logo - Left aligned, larger size */
-  .logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: opacity var(--transition-fast);
-    flex-shrink: 0;
-  }
-
-  .logo-link:hover {
-    opacity: 0.8;
-  }
-
-  .logo {
-    /* Mobile: smaller logo */
-    width: 48px;
-    height: 48px;
-    transition: all var(--transition-base);
-  }
-
-  @media (min-width: 640px) {
-    .logo {
-      /* Tablet: medium logo */
-      width: 56px;
-      height: 56px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .logo {
-      /* Desktop: larger logo */
-      width: 72px;
-      height: 72px;
-    }
-  }
-
-  /* Right section: navigation + actions */
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-left: auto;
-  }
-
-  /* Desktop Navigation */
-  .nav-links {
-    display: none;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .nav-links {
-      display: flex;
-    }
-  }
-
+  /* Navigation Link with animated underline effect */
   .nav-link {
+    position: relative;
     color: white;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9375rem;
-    transition: all var(--transition-fast);
-    position: relative;
-    padding: 0.5rem 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: color 200ms;
   }
 
   .nav-link::after {
@@ -237,7 +128,7 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
     width: 0;
     height: 2px;
     background-color: var(--color-gold-400);
-    transition: width var(--transition-fast);
+    transition: width 200ms;
   }
 
   .nav-link:hover {
@@ -246,103 +137,6 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
 
   .nav-link:hover::after {
     width: 100%;
-  }
-
-  /* Navigation Actions - always on the right */
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  /* Theme Toggle - hide on mobile, show on desktop */
-  .theme-toggle-desktop {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .theme-toggle-desktop {
-      display: block;
-    }
-  }
-
-  .mobile-menu-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.5rem;
-    background-color: var(--color-primary-700);
-    border: 2px solid var(--color-primary-800);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: white;
-  }
-
-  @media (min-width: 768px) {
-    .mobile-menu-button {
-      display: none;
-    }
-  }
-
-  .mobile-menu-button:hover {
-    background-color: var(--color-primary-800);
-  }
-
-  .mobile-menu-button:focus {
-    outline: 2px solid var(--color-gold-400);
-    outline-offset: 2px;
-  }
-
-  /* Mobile Menu */
-  .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  @media (min-width: 768px) {
-    .mobile-menu {
-      display: none !important;
-    }
-  }
-
-  .mobile-nav-link {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.875rem 1.25rem;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-  }
-
-  .mobile-nav-link:hover {
-    background-color: var(--color-primary-700);
-    color: var(--color-gold-200);
-  }
-
-  /* Theme Toggle in mobile menu */
-  .mobile-theme-toggle {
-    display: flex;
-    justify-content: center;
-    padding: 1rem 1.25rem;
-    margin-top: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  @media (min-width: 768px) {
-    .mobile-theme-toggle {
-      display: none;
-    }
-  }
-
-  /* Utility Classes */
-  .hidden {
-    display: none;
   }
 </style>
 
