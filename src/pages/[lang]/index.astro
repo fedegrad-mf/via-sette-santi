@@ -40,25 +40,21 @@ const sampleReviews = [
 		location: "Milano, Italy",
 		rating: 5,
 		date: "November 2024",
-		text: lang === 'it' 
-			? "Un'esperienza straordinaria! Il cammino offre paesaggi mozzafiato e un'atmosfera di profonda spiritualità. Le chiese sono tutte meravigliose."
-			: "An extraordinary experience! The trail offers breathtaking landscapes and an atmosphere of deep spirituality. The churches are all wonderful."
+		text: t('reviews.sample1.text')
 	},
 	{
 		name: "Anna Weber",
 		location: "Munich, Germany",
 		rating: 5,
 		date: "October 2024",
-		text: lang === 'de'
-			? "Eine wunderbare spirituelle Reise durch die Berge. Die Gastfreundschaft der Einheimischen und die Schönheit der Natur sind unvergesslich."
-			: "A wonderful spiritual journey through the mountains. The hospitality of the locals and the beauty of nature are unforgettable."
+		text: t('reviews.sample2.text')
 	},
 	{
 		name: "Sarah Johnson",
 		location: "London, UK",
 		rating: 4,
 		date: "September 2024",
-		text: "Beautiful scenery and well-marked trails. The combination of nature and spirituality makes this trek unique. Highly recommended!"
+		text: t('reviews.sample3.text')
 	}
 ];
 
@@ -68,30 +64,30 @@ const bookingOptions = [
 		title: t('booking.individual'),
 		description: t('booking.individualDesc'),
 		features: [
-			lang === 'it' ? 'Mappe e guida dettagliata' : lang === 'de' ? 'Karten und detaillierter Führer' : 'Maps and detailed guide',
-			lang === 'it' ? 'Supporto telefonico 24/7' : lang === 'de' ? '24/7 telefonische Unterstützung' : '24/7 phone support',
-			lang === 'it' ? 'Prenotazione alloggi' : lang === 'de' ? 'Unterkunftsbuchung' : 'Accommodation booking',
+			t('booking.feature.mapsGuide'),
+			t('booking.feature.support247'),
+			t('booking.feature.accommodationBooking'),
 		]
 	},
 	{
 		title: t('booking.group'),
 		description: t('booking.groupDesc'),
 		features: [
-			lang === 'it' ? 'Guida locale esperta' : lang === 'de' ? 'Erfahrener lokaler Führer' : 'Expert local guide',
-			lang === 'it' ? 'Gruppo max 12 persone' : lang === 'de' ? 'Gruppe max. 12 Personen' : 'Group max 12 people',
-			lang === 'it' ? 'Visite guidate alle chiese' : lang === 'de' ? 'Geführte Kirchenbesichtigungen' : 'Guided church visits',
-			lang === 'it' ? 'Assicurazione inclusa' : lang === 'de' ? 'Versicherung inbegriffen' : 'Insurance included',
+			t('booking.feature.expertGuide'),
+			t('booking.feature.groupMax12'),
+			t('booking.feature.guidedVisits'),
+			t('booking.feature.insuranceIncluded'),
 		]
 	},
 	{
 		title: t('booking.premium'),
 		description: t('booking.premiumDesc'),
 		features: [
-			lang === 'it' ? 'Guida privata dedicata' : lang === 'de' ? 'Privater Führer' : 'Private dedicated guide',
-			lang === 'it' ? 'Alloggi premium' : lang === 'de' ? 'Premium-Unterkunft' : 'Premium accommodations',
-			lang === 'it' ? 'Tutti i pasti inclusi' : lang === 'de' ? 'Alle Mahlzeiten inklusive' : 'All meals included',
-			lang === 'it' ? 'Transfer bagagli' : lang === 'de' ? 'Gepäcktransfer' : 'Luggage transfer',
-			lang === 'it' ? 'Massaggio dopo trekking' : lang === 'de' ? 'Massage nach dem Wandern' : 'Post-trek massage',
+			t('booking.feature.privateGuide'),
+			t('booking.feature.premiumAccommodation'),
+			t('booking.feature.mealsIncluded'),
+			t('booking.feature.luggageTransfer'),
+			t('booking.feature.postTrekMassage'),
 		]
 	}
 ];
