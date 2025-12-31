@@ -26,47 +26,47 @@ const formattedDate = page.data.date.toLocaleString(lang);
 ---
 
 <BaseLayout>
-  <article class="container-custom" style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem;">
-    <header style="margin-bottom: 2rem;">
-      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-        <span style="background-color: var(--color-primary-600); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">
+  <article class="container-custom max-w-[900px] mx-auto py-8 px-4">
+    <header class="mb-8">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold">
           {page.data.number}
         </span>
-        <h1 style="font-size: 2.5rem; margin: 0;">{page.data.title}</h1>
+        <h1 class="text-4xl m-0">{page.data.title}</h1>
       </div>
       
-      <p style="font-size: 1.25rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">{page.data.description}</p>
+      <p class="text-xl text-muted mb-6">{page.data.description}</p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; padding: 1.5rem; background-color: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-6 bg-surface rounded-lg border border-border">
         <div>
-          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Distance</div>
-          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.distance}</div>
+          <div class="text-sm text-muted mb-1">Distance</div>
+          <div class="text-lg font-semibold">{page.data.distance}</div>
         </div>
         <div>
-          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Duration</div>
-          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.duration}</div>
+          <div class="text-sm text-muted mb-1">Duration</div>
+          <div class="text-lg font-semibold">{page.data.duration}</div>
         </div>
         <div>
-          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Difficulty</div>
-          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text); text-transform: capitalize;">{page.data.difficulty}</div>
+          <div class="text-sm text-muted mb-1">Difficulty</div>
+          <div class="text-lg font-semibold capitalize">{page.data.difficulty}</div>
         </div>
         <div>
-          <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Elevation</div>
-          <div style="font-size: 1.125rem; font-weight: 600; color: var(--color-text);">{page.data.elevation}</div>
+          <div class="text-sm text-muted mb-1">Elevation</div>
+          <div class="text-lg font-semibold">{page.data.elevation}</div>
         </div>
       </div>
     </header>
 
-    <div class="prose" style="line-height: 1.8;">
+    <div class="prose leading-relaxed">
       <Content />
     </div>
 
     {page.data.highlights && page.data.highlights.length > 0 && (
-      <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
-        <h3 style="margin-top: 0;">Highlights</h3>
-        <ul style="margin: 0; padding-left: 1.5rem;">
+      <div class="mt-8 p-6 bg-surface rounded-lg border border-border">
+        <h3 class="mt-0">Highlights</h3>
+        <ul class="m-0 pl-6">
           {page.data.highlights.map((highlight: string) => (
-            <li style="margin-bottom: 0.5rem; color: var(--color-text);">{highlight}</li>
+            <li class="mb-2">{highlight}</li>
           ))}
         </ul>
       </div>

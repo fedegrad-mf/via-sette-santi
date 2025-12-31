@@ -291,56 +291,18 @@ Sezione con sfondo alternativo (usa `--color-surface`).
 </section>
 ```
 
-#### `.section-spacing`
-Aggiunge spaziatura superiore tra sezioni per migliorare la separazione visiva.
-- **Desktop**: 5rem (80px)
-- **Tablet (≤1024px)**: 4rem (64px)
-- **Mobile (≤768px)**: 3rem (48px)
-- **Uso**: Tra sezioni principali della pagina
+**Spaziatura tra sezioni**: Usa direttamente le utility classes di Tailwind sui componenti sezione invece di wrapper div:
+- `mt-28` = 7rem mobile
+- `lg:mt-32` = 8rem tablet/desktop  
+- `xl:mt-36` = 9rem schermi grandi
 
 ```astro
-<div class="section-spacing">
-  <OverviewSection ... />
-</div>
+<OverviewSection 
+  class="mt-28 lg:mt-32 xl:mt-36"
+  title={t('overview.title')}
+  ...
+/>
 ```
-
-#### `.section-spacing-lg`
-Spaziatura superiore grande tra sezioni.
-- **Desktop**: 7rem (112px)
-- **Tablet (≤1024px)**: 5.5rem (88px)
-- **Mobile (≤768px)**: 4rem (64px)
-- **Uso**: Per enfatizzare separazioni importanti (es. dopo hero)
-
-```astro
-<div class="section-spacing-lg">
-  <TrailsSection ... />
-</div>
-```
-
-#### `.section-spacing-xl`
-Spaziatura superiore extra-large tra sezioni.
-- **Desktop**: 9rem (144px)
-- **Tablet (≤1024px)**: 7rem (112px)
-- **Mobile (≤768px)**: 5rem (80px)
-- **Uso**: Per separazioni drammatiche tra macro-sezioni
-
-#### `.component-spacing`
-Aggiunge spaziatura tra componenti all'interno di una sezione.
-- **Desktop**: 3rem (48px)
-- **Mobile (≤768px)**: 2rem (32px)
-- **Uso**: Tra elementi correlati dentro la stessa sezione
-
-```astro
-<div class="component-spacing">
-  <InfoBox ... />
-</div>
-```
-
-#### `.component-spacing-lg`
-Spaziatura grande tra componenti.
-- **Desktop**: 4rem (64px)
-- **Mobile (≤768px)**: 2.5rem (40px)
-- **Uso**: Per maggiore separazione tra componenti
 
 #### `.section-header`
 Header standard per le sezioni (centrato, con max-width).

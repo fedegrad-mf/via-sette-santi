@@ -244,61 +244,6 @@
     border-bottom: 1px solid var(--color-border);
   }
 
-  /* Section Spacing Utilities - For adding space between sections */
-  .section-spacing {
-    margin-top: 5rem;
-  }
-
-  .section-spacing-lg {
-    margin-top: 7rem;
-  }
-
-  .section-spacing-xl {
-    margin-top: 9rem;
-  }
-
-  @media (max-width: 1024px) {
-    .section-spacing {
-      margin-top: 4rem;
-    }
-    .section-spacing-lg {
-      margin-top: 5.5rem;
-    }
-    .section-spacing-xl {
-      margin-top: 7rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .section-spacing {
-      margin-top: 3rem;
-    }
-    .section-spacing-lg {
-      margin-top: 4rem;
-    }
-    .section-spacing-xl {
-      margin-top: 5rem;
-    }
-  }
-
-  /* Component Spacing Utilities - For adding space between components within sections */
-  .component-spacing {
-    margin-top: 3rem;
-  }
-
-  .component-spacing-lg {
-    margin-top: 4rem;
-  }
-
-  @media (max-width: 768px) {
-    .component-spacing {
-      margin-top: 2rem;
-    }
-    .component-spacing-lg {
-      margin-top: 2.5rem;
-    }
-  }
-
   /* Section Header Utilities */
   .section-header {
     text-align: center;
@@ -716,19 +661,6 @@
     background-color: var(--color-surface-hover);
     border-color: var(--color-primary-500);
     color: var(--color-primary-700);
-  }
-
-  .card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-6);
-    transition: all var(--transition-base);
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-border-hover);
   }
 
   .link {

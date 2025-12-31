@@ -25,15 +25,15 @@ const { Content } = await render(page);
 ---
 
 <BaseLayout>
-  <article class="container-custom" style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
-    <header style="margin-bottom: 2rem;">
-      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{page.data.name}</h1>
-      <p style="font-size: 1.25rem; color: var(--color-text-muted);">{page.data.church}</p>
-      <p style="color: var(--color-text-muted);">📍 {page.data.location}</p>
-      {page.data.feastDay && <p style="color: var(--color-text-muted);">🗓️ Feast Day: {page.data.feastDay}</p>}
+  <article class="container-custom max-w-[800px] mx-auto py-8 px-4">
+    <header class="mb-8">
+      <h1 class="text-4xl mb-2">{page.data.name}</h1>
+      <p class="text-xl text-muted">{page.data.church}</p>
+      <p class="text-muted">📍 {page.data.location}</p>
+      {page.data.feastDay && <p class="text-muted">🗓️ Feast Day: {page.data.feastDay}</p>}
     </header>
 
-    <div class="prose" style="line-height: 1.8;">
+    <div class="prose leading-relaxed">
       <Content />
     </div>
   </article>

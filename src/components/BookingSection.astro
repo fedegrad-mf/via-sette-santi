@@ -29,7 +29,7 @@ const { title, subtitle, options, contactText, contactLink } = Astro.props;
     <div class="content-wrapper-lg">
       <div class="grid-auto-fit" style="--grid-min-width: 300px;">
         {options.map((option) => (
-          <div class="card-base booking-card">
+          <div class="card booking-card">
             <div class="card-content">
               <h3 class="card-title">{option.title}</h3>
               <p class="text-muted">{option.description}</p>
