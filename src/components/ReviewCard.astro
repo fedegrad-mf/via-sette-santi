@@ -22,8 +22,8 @@ const { name, date, rating, text, location } = Astro.props;
         {name.charAt(0).toUpperCase()}
       </div>
       <div class="review-meta">
-        <h4 style="font-size: 1.125rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.25rem 0;">{name}</h4>
-        {location && <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0 0 0.5rem 0;">{location}</p>}
+        <h4 class="card-subtitle">{name}</h4>
+        {location && <p class="card-meta">{location}</p>}
         <div class="review-rating">
           {Array.from({ length: 5 }).map((_, i) => (
             <span class={`star ${i < rating ? 'filled' : ''}`}>★</span>
@@ -32,9 +32,9 @@ const { name, date, rating, text, location } = Astro.props;
       </div>
     </div>
     
-    <p class="text-muted" style="line-height: 1.6; margin: 0;">{text}</p>
+    <p class="card-text">{text}</p>
     
-    <time style="display: block; font-size: 0.875rem; color: var(--color-text-muted);" datetime={date}>{date}</time>
+    <time class="card-meta block" datetime={date}>{date}</time>
   </div>
 </article>
 

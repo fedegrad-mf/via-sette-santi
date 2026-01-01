@@ -35,43 +35,43 @@ const pageDescription = page.data.description || `${page.data.distance} - ${page
   ogImage={page.data.image}
   ogType="article"
 >
-  <article class="container-custom max-w-[900px] mx-auto py-8 px-4">
+  <article class="container-custom content-wrapper py-8 px-4">
     <header class="mb-8">
       <div class="flex items-center gap-4 mb-4">
         <span class="bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold">
           {page.data.number}
         </span>
-        <h1 class="text-4xl m-0">{page.data.title}</h1>
+        <h1 class="page-title m-0">{page.data.title}</h1>
       </div>
       
       <p class="text-xl text-muted mb-6">{page.data.description}</p>
 
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-6 bg-surface rounded-lg border border-border">
-        <div>
-          <div class="text-sm text-muted mb-1">Distance</div>
-          <div class="text-lg font-semibold">{page.data.distance}</div>
+      <div class="info-box grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="info-item">
+          <strong class="info-item-label">Distance</strong>
+          <span class="info-item-value">{page.data.distance}</span>
         </div>
-        <div>
-          <div class="text-sm text-muted mb-1">Duration</div>
-          <div class="text-lg font-semibold">{page.data.duration}</div>
+        <div class="info-item">
+          <strong class="info-item-label">Duration</strong>
+          <span class="info-item-value">{page.data.duration}</span>
         </div>
-        <div>
-          <div class="text-sm text-muted mb-1">Difficulty</div>
-          <div class="text-lg font-semibold capitalize">{page.data.difficulty}</div>
+        <div class="info-item">
+          <strong class="info-item-label">Difficulty</strong>
+          <span class="info-item-value capitalize">{page.data.difficulty}</span>
         </div>
-        <div>
-          <div class="text-sm text-muted mb-1">Elevation</div>
-          <div class="text-lg font-semibold">{page.data.elevation}</div>
+        <div class="info-item">
+          <strong class="info-item-label">Elevation</strong>
+          <span class="info-item-value">{page.data.elevation}</span>
         </div>
       </div>
     </header>
 
-    <div class="prose leading-relaxed">
+    <div class="prose prose-lg">
       <Content />
     </div>
 
     {page.data.highlights && page.data.highlights.length > 0 && (
-      <div class="mt-8 p-6 bg-surface rounded-lg border border-border">
+      <div class="info-box mt-8">
         <h3 class="mt-0">Highlights</h3>
         <ul class="m-0 pl-6">
           {page.data.highlights.map((highlight: string) => (
@@ -82,41 +82,3 @@ const pageDescription = page.data.description || `${page.data.distance} - ${page
     )}
   </article>
 </BaseLayout>
-
-<style>
-  .prose :global(h1) {
-    font-size: 2.25rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  .prose :global(h2) {
-    font-size: 1.75rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  .prose :global(h3) {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--color-text);
-  }
-
-  .prose :global(p) {
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  .prose :global(ul) {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .prose :global(li) {
-    margin-bottom: 0.5rem;
-    color: var(--color-text);
-  }
-</style>

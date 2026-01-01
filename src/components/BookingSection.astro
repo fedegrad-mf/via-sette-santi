@@ -26,7 +26,7 @@ const { title, subtitle, options, contactText, contactLink } = Astro.props;
       <p class="section-subtitle">{subtitle}</p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {options.map((option) => (
         <div class="card booking-card">
           <div class="card-content">
@@ -44,7 +44,7 @@ const { title, subtitle, options, contactText, contactLink } = Astro.props;
               ))}
             </ul>
 
-            <a href={contactLink} class="btn btn-outline" style="width: 100%; justify-content: center;">
+            <a href={contactLink} class="btn btn-outline w-full justify-center">
               {contactText}
             </a>
           </div>

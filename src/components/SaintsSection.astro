@@ -37,7 +37,7 @@ const { title, subtitle, saints, lang, translations, class: className } = Astro.
 			<p class="section-subtitle">{subtitle}</p>
 		</div>
 
-		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<div class="grid-responsive">
 			{saints.map((saint) => (
 				<SaintCard
 					name={saint.data.name}
