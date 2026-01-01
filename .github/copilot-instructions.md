@@ -429,7 +429,7 @@ When creating a new page, follow this checklist:
 
 **i18n Requirements:**
 - [ ] Add translations to `src/i18n/ui.ts` for all languages
-- [ ] Use `useTranslations(lang)` helper for all UI strings
+- [ ] Use `useTranslations(lang as keyof typeof languages)` helper for all UI strings
 - [ ] Create content in all supported languages (en, it, de)
 - [ ] Test language switching maintains current page context
 - [ ] Verify hreflang tags are generated correctly
