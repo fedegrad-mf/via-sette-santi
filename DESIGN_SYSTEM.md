@@ -132,15 +132,48 @@ Standard section with responsive padding.
 
 ### Typography
 
+**Font Families:**
+- **Primary (Sans)**: `Inter` - Modern, highly readable font optimized for web and UI. Used for body text, descriptions, navigation.
+- **Display (Serif)**: `Playfair Display` - Elegant serif font for headings, titles, and spiritual elements. Adds sophistication and gravitas.
+- **Monospace**: System default stack for code and technical content.
+
+**Tailwind Classes:**
+- `font-sans` - Apply Inter font family
+- `font-serif` - Apply Playfair Display font family
+- `font-mono` - Apply monospace font family
+
+**Usage in Code:**
+```astro
+<!-- Using utility class directly -->
+<h1 class="font-serif text-4xl">Via dei Sette Santi</h1>
+
+<!-- Automatic via .section-title and .page-title -->
+<h2 class="section-title">Discover the Path</h2>
+```
+
+**Title Classes (automatically use Playfair Display):**
+
 #### `.section-title`
-- Bold weight (800)
+- Font: Playfair Display (serif)
+- Bold weight (700)
 - Underline decoration (gradient nature bar)
 - Centered alignment
 
 #### `.page-title`
-- Extra bold (800)
+- Font: Playfair Display (serif)
+- Bold weight (700)
 - Left-aligned gradient underline (spiritual gradient)
 - Larger size (3rem)
+
+#### `.card-title`
+- Font: Inter (sans-serif)
+- Semi-bold weight (600)
+- Standard content title
+
+**Font Loading:**
+- Fonts loaded via Google Fonts in `Base.astro` layout
+- Preconnect tags for performance optimization
+- `display=swap` for better web performance
 
 ### Info Box
 Modern info container:
