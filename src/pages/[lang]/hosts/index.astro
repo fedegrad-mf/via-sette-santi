@@ -1,0 +1,153 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languages } from "../../../i18n/languages";
+import BaseLayout from "../../../layouts/Base.astro";
+import { useTranslations } from "../../../i18n/utils";
+
+export function getStaticPaths() {
+	return Object.keys(languages).map((lang) => ({
+		params: { lang },
+	}));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof languages);
+
+// Get all hosts for this language
+const allHosts = await getCollection("hosts", ({ id }) => {
+  return id.startsWith(`${lang}/`);
+});
+
+// Sort by featured first, then by name
+const sortedHosts = allHosts.sort((a, b) => {
+  if (a.data.featured !== b.data.featured) {
+    return a.data.featured ? -1 : 1;
+  }
+  return a.data.name.localeCompare(b.data.name);
+});
+---
+
+<BaseLayout
+  title={`${t('hosts.title')} | Via dei Sette Santi`}
+  description={t('hosts.subtitle')}
+>
+  <!-- Page Header -->
+  <section class="section">
+    <div class="container-custom">
+      <div class="section-header">
+        <h1 class="page-title">{t('hosts.title')}</h1>
+        <p class="section-subtitle">{t('hosts.subtitle')}</p>
+      </div>
+
+      <!-- Hosts Grid -->
+      <div class="grid-auto-fit" style="--grid-min-width: 350px;">
+        {sortedHosts.map((host) => {
+          const slug = host.id.split('/').slice(1).join('/').replace('.md', '');
+          const hostUrl = getRelativeLocaleUrl(lang, `hosts/${slug}`);
+          const imagePath = host.data.image 
+            ? `${import.meta.env.BASE_URL}images/hosts/${host.data.image}` 
+            : `${import.meta.env.BASE_URL}images/placeholder-host.jpg`;
+
+          return (
+            <article class="card">
+              {/* Badge Featured */}
+              {host.data.featured && (
+                <div class="absolute top-4 left-4 z-10 bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                  ⭐ Featured
+                </div>
+              )}
+
+              {/* Image */}
+              <div class="card-image relative">
+                <img
+                  src={imagePath}
+                  alt={host.data.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="card-image-overlay">
+                  <div class="absolute top-4 right-4">
+                    <span class="bg-white/90 dark:bg-surface-900/90 px-3 py-1 rounded-lg text-sm font-medium">
+                      {t(`host.type.${host.data.type}`)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div class="card-content">
+                <h3 class="card-title">{host.data.name}</h3>
+                
+                {/* Location */}
+                <div class="flex items-center gap-2 text-sm text-muted mb-3">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span>{host.data.location}</span>
+                </div>
+
+                {/* Description */}
+                <p class="text-muted text-sm leading-relaxed mb-4 line-clamp-3">
+                  {host.data.description}
+                </p>
+
+                {/* Services Icons (first 4) */}
+                <div class="flex gap-2 mb-4 flex-wrap">
+                  {host.data.services.slice(0, 4).map((service) => (
+                    <div 
+                      class="bg-surface-100 dark:bg-surface-800 px-2 py-1 rounded text-xs font-medium"
+                      title={t(`host.service.${service}`)}
+                    >
+                      {t(`host.service.${service}`)}
+                    </div>
+                  ))}
+                  {host.data.services.length > 4 && (
+                    <div class="bg-surface-100 dark:bg-surface-800 px-2 py-1 rounded text-xs font-medium text-muted">
+                      +{host.data.services.length - 4}
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer */}
+                <div class="card-footer">
+                  {host.data.priceRange && (
+                    <span class="card-badge">
+                      {t(`host.priceRange.${host.data.priceRange}`)}
+                    </span>
+                  )}
+                  <a href={hostUrl} class="card-link">
+                    {t('trails.viewDetails')}
+                    <svg class="card-link-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {/* Empty State */}
+      {sortedHosts.length === 0 && (
+        <div class="text-center py-16">
+          <svg class="w-16 h-16 mx-auto mb-4 text-muted opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          </svg>
+          <p class="text-lg text-muted">No accommodations available yet.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

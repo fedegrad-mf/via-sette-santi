@@ -42,6 +42,10 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
             href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
             class="nav-link">Saints</a
           >
+          <a
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/hosts")}
+            class="nav-link">Hosts</a
+          >
           <a href="#" class="nav-link">Contact</a>
         </div>
 
@@ -95,6 +99,10 @@ const { lang: currentLang } = Astro.params; // current selected language in the 
         <a
           href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/saints")}
           class="mobile-nav-link">Saints</a
+        >
+        <a
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/hosts")}
+          class="mobile-nav-link">Hosts</a
         >
         <a href="#" class="mobile-nav-link">Contact</a>
         
