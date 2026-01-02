@@ -545,13 +545,12 @@
     min-height: calc(100vh - 16rem);
   }
 
-  /* Info Box Utility */
+  /* Info Box Utility - Flat modern design */
   .info-box {
     padding: 2rem;
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
-    border: 2px solid var(--color-border);
-    border-left: 4px solid var(--color-primary-600);
+    box-shadow: var(--shadow-md);
   }
 
   @media (max-width: 768px) {
