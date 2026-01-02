@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/Base.astro";
+import Navigation from "../../../components/Navigation.astro";
 import { useTranslations } from "../../../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { languages } from "../../../i18n/languages";
@@ -183,101 +184,13 @@ const imagePath = page.data.image ? `${import.meta.env.BASE_URL}images/saints/${
       </div>
 
       <!-- Saints Navigation -->
-      <section>
-        <h2 class="text-2xl font-bold text-center mb-8">{t('saint.navigation')}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <!-- Previous Saint -->
-          {previousSaint ? (
-            <a
-              href={getRelativeLocaleUrl(lang, `saints/${previousSaint.id.split('/').slice(1).join('/')}`)}
-              class="card group hover:shadow-xl transition-shadow"
-            >
-              <div class="card-content">
-                <p class="text-sm text-muted mb-2">
-                  <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                  </svg>
-                  {t('saint.previousSaint')}
-                </p>
-                <div class="flex items-center gap-3">
-                  <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
-                    {previousSaint.data.order}
-                  </span>
-                  <div class="min-w-0">
-                    <h3 class="font-semibold text-base mb-1 truncate">{previousSaint.data.name}</h3>
-                    <p class="text-sm text-muted truncate">{previousSaint.data.church}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-          ) : (
-            <div class="card opacity-50 cursor-not-allowed">
-              <div class="card-content">
-                <p class="text-sm text-muted mb-2">
-                  <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                  </svg>
-                  {t('saint.previousSaint')}
-                </p>
-                <p class="text-sm text-muted">{t('saint.backToSaints')}</p>
-              </div>
-            </div>
-          )}
-
-          <!-- Back to All Saints -->
-          <a
-            href={getRelativeLocaleUrl(lang, '')}
-            class="card group hover:shadow-xl transition-shadow border-2 border-primary-200 dark:border-primary-800"
-          >
-            <div class="card-content">
-              <div class="text-center">
-                <svg class="w-8 h-8 mx-auto mb-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
-                <p class="text-sm font-medium">{t('saint.backToSaints')}</p>
-              </div>
-            </div>
-          </a>
-
-          <!-- Next Saint -->
-          {nextSaint ? (
-            <a
-              href={getRelativeLocaleUrl(lang, `saints/${nextSaint.id.split('/').slice(1).join('/')}`)}
-              class="card group hover:shadow-xl transition-shadow"
-            >
-              <div class="card-content">
-                <p class="text-sm text-muted mb-2 text-right">
-                  {t('saint.nextSaint')}
-                  <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </p>
-                <div class="flex items-center gap-3 justify-end">
-                  <div class="min-w-0 text-right">
-                    <h3 class="font-semibold text-base mb-1 truncate">{nextSaint.data.name}</h3>
-                    <p class="text-sm text-muted truncate">{nextSaint.data.church}</p>
-                  </div>
-                  <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
-                    {nextSaint.data.order}
-                  </span>
-                </div>
-              </div>
-            </a>
-          ) : (
-            <div class="card opacity-50 cursor-not-allowed">
-              <div class="card-content">
-                <p class="text-sm text-muted mb-2 text-right">
-                  {t('saint.nextSaint')}
-                  <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </p>
-                <p class="text-sm text-muted text-right">{t('saint.backToSaints')}</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      <Navigation
+        lang={lang}
+        type="saints"
+        previous={previousSaint}
+        next={nextSaint}
+        homeUrl={getRelativeLocaleUrl(lang, '')}
+      />
     </div>
   </article>
 </BaseLayout>

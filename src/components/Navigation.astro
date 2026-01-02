@@ -1,0 +1,157 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "../i18n/utils";
+import { languages } from "../i18n/languages";
+
+interface Props {
+  lang: string;
+  type: 'trails' | 'saints';
+  previous?: {
+    id: string;
+    data: {
+      number?: number;
+      order?: number;
+      title?: string;
+      name?: string;
+      church?: string;
+    };
+  } | null;
+  next?: {
+    id: string;
+    data: {
+      number?: number;
+      order?: number;
+      title?: string;
+      name?: string;
+      church?: string;
+    };
+  } | null;
+  homeUrl: string;
+}
+
+const { lang, type, previous, next, homeUrl } = Astro.props;
+const t = useTranslations(lang as keyof typeof languages);
+
+// Get the display number/order
+const getNumber = (item: typeof previous) => {
+  return type === 'trails' ? item?.data.number : item?.data.order;
+};
+
+// Get the title/name
+const getTitle = (item: typeof previous) => {
+  return type === 'trails' ? item?.data.title : item?.data.name;
+};
+
+// Get the subtitle (only for saints)
+const getSubtitle = (item: typeof previous) => {
+  return type === 'saints' ? item?.data.church : undefined;
+};
+
+// Generate URL for previous/next items
+const getItemUrl = (item: typeof previous) => {
+  if (!item) return '';
+  const slug = item.id.split('/').slice(1).join('/');
+  const basePath = type === 'trails' ? 'trails' : 'saints';
+  return getRelativeLocaleUrl(lang, `${basePath}/${slug}`);
+};
+---
+
+<section>
+  <h2 class="text-2xl font-bold text-center mb-8">{t(type === 'trails' ? 'trail.navigation' : 'saint.navigation')}</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Previous Item -->
+    {previous ? (
+      <a
+        href={getItemUrl(previous)}
+        class="card group hover:shadow-xl transition-shadow"
+      >
+        <div class="card-content">
+          <p class="text-sm text-muted mb-2">
+            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            {t(type === 'trails' ? 'trail.previousStage' : 'saint.previousSaint')}
+          </p>
+          <div class="flex items-center gap-3">
+            <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+              {getNumber(previous)}
+            </span>
+            <div class="min-w-0">
+              <h3 class="font-semibold text-base mb-1 truncate">{getTitle(previous)}</h3>
+              {getSubtitle(previous) && (
+                <p class="text-sm text-muted truncate">{getSubtitle(previous)}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </a>
+    ) : (
+      <div class="card opacity-50 cursor-not-allowed">
+        <div class="card-content">
+          <p class="text-sm text-muted mb-2">
+            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            {t(type === 'trails' ? 'trail.previousStage' : 'saint.previousSaint')}
+          </p>
+          <p class="text-sm text-muted">—</p>
+        </div>
+      </div>
+    )}
+
+    <!-- Back to All Items -->
+    <a
+      href={homeUrl}
+      class="card group hover:shadow-xl transition-shadow border-2 border-primary-200 dark:border-primary-800"
+    >
+      <div class="card-content">
+        <div class="text-center">
+          <svg class="w-8 h-8 mx-auto mb-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+          <p class="text-sm font-medium">{t(type === 'trails' ? 'trail.allTrails' : 'saint.allSaints')}</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Next Item -->
+    {next ? (
+      <a
+        href={getItemUrl(next)}
+        class="card group hover:shadow-xl transition-shadow"
+      >
+        <div class="card-content">
+          <p class="text-sm text-muted mb-2 text-right">
+            {t(type === 'trails' ? 'trail.nextStage' : 'saint.nextSaint')}
+            <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </p>
+          <div class="flex items-center gap-3 justify-end">
+            <div class="min-w-0 text-right">
+              <h3 class="font-semibold text-base mb-1 truncate">{getTitle(next)}</h3>
+              {getSubtitle(next) && (
+                <p class="text-sm text-muted truncate">{getSubtitle(next)}</p>
+              )}
+            </div>
+            <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+              {getNumber(next)}
+            </span>
+          </div>
+        </div>
+      </a>
+    ) : (
+      <div class="card opacity-50 cursor-not-allowed">
+        <div class="card-content">
+          <p class="text-sm text-muted mb-2 text-right">
+            {t(type === 'trails' ? 'trail.nextStage' : 'saint.nextSaint')}
+            <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </p>
+          <p class="text-sm text-muted text-right">—</p>
+        </div>
+      </div>
+    )}
+  </div>
+</section>

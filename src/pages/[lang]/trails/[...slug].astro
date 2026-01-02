@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/Base.astro";
+import Navigation from "../../../components/Navigation.astro";
 import { useTranslations } from "../../../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { languages } from "../../../i18n/languages";
@@ -231,99 +232,13 @@ const imagePath = page.data.image ? `${import.meta.env.BASE_URL}images/trails/${
       </div>
 
       <!-- Trail Navigation -->
-      <section>
-        <h2 class="text-2xl font-bold text-center mb-8">{t('trail.navigation')}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Previous Trail -->
-            {previousTrail ? (
-              <a
-                href={getRelativeLocaleUrl(lang, `trails/${previousTrail.id.split('/').slice(1).join('/')}`)}
-                class="card group hover:shadow-xl transition-shadow"
-              >
-                <div class="card-content">
-                  <p class="text-sm text-muted mb-2">
-                    <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                    {t('trail.previousStage')}
-                  </p>
-                  <div class="flex items-center gap-3">
-                    <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
-                      {previousTrail.data.number}
-                    </span>
-                    <h3 class="text-lg font-semibold group-hover:text-primary-600 transition-colors">
-                      {previousTrail.data.title}
-                    </h3>
-                  </div>
-                </div>
-              </a>
-            ) : (
-              <div class="card opacity-50">
-                <div class="card-content">
-                  <p class="text-sm text-muted mb-2">
-                    <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                    {t('trail.previousStage')}
-                  </p>
-                  <p class="text-muted">—</p>
-                </div>
-              </div>
-            )}
-
-            <!-- Back to All Trails -->
-            <a
-              href={getRelativeLocaleUrl(lang, 'trails')}
-              class="card group hover:shadow-xl transition-shadow bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800"
-            >
-              <div class="card-content text-center">
-                <svg class="w-8 h-8 text-primary-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-                </svg>
-                <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                  {t('trail.backToTrails')}
-                </h3>
-              </div>
-            </a>
-
-            <!-- Next Trail -->
-            {nextTrail ? (
-              <a
-                href={getRelativeLocaleUrl(lang, `trails/${nextTrail.id.split('/').slice(1).join('/')}`)}
-                class="card group hover:shadow-xl transition-shadow"
-              >
-                <div class="card-content text-right">
-                  <p class="text-sm text-muted mb-2">
-                    {t('trail.nextStage')}
-                    <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </p>
-                  <div class="flex items-center gap-3 justify-end">
-                    <h3 class="text-lg font-semibold group-hover:text-primary-600 transition-colors">
-                      {nextTrail.data.title}
-                    </h3>
-                    <span class="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
-                      {nextTrail.data.number}
-                    </span>
-                  </div>
-                </div>
-              </a>
-            ) : (
-              <div class="card opacity-50">
-                <div class="card-content text-right">
-                  <p class="text-sm text-muted mb-2">
-                    {t('trail.nextStage')}
-                    <svg class="inline w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </p>
-                  <p class="text-muted">—</p>
-                </div>
-              </div>
-            )}
-          </div>
-      </section>
+      <Navigation
+        lang={lang}
+        type="trails"
+        previous={previousTrail}
+        next={nextTrail}
+        homeUrl={getRelativeLocaleUrl(lang, 'trails')}
+      />
     </div>
   </article>
 </BaseLayout>

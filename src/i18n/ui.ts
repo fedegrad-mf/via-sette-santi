@@ -70,6 +70,7 @@ export const ui = {
     'trail.previousStage': 'Previous Stage',
     'trail.nextStage': 'Next Stage',
     'trail.backToTrails': 'Back to All Trails',
+    'trail.allTrails': 'All Trails',
     'trail.stage': 'Stage',
     'saint.details': 'Church Details',
     'saint.history': 'History & Culture',
@@ -82,6 +83,7 @@ export const ui = {
     'saint.previousSaint': 'Previous Saint',
     'saint.nextSaint': 'Next Saint',
     'saint.backToSaints': 'Back to All Saints',
+    'saint.allSaints': 'All Saints',
   },
   it: {
     'nav.home': 'Home',
@@ -152,6 +154,7 @@ export const ui = {
     'trail.previousStage': 'Tappa Precedente',
     'trail.nextStage': 'Tappa Successiva',
     'trail.backToTrails': 'Torna a Tutte le Tappe',
+    'trail.allTrails': 'Tutti i Percorsi',
     'trail.stage': 'Tappa',
     'saint.details': 'Dettagli della Chiesa',
     'saint.history': 'Storia e Cultura',
@@ -164,6 +167,7 @@ export const ui = {
     'saint.previousSaint': 'Santo Precedente',
     'saint.nextSaint': 'Santo Successivo',
     'saint.backToSaints': 'Torna a Tutti i Santi',
+    'saint.allSaints': 'Tutti i Santi',
   },
   de: {
     'nav.home': 'Startseite',
@@ -245,6 +249,8 @@ export const ui = {
     'trail.previousStage': 'Vorherige Etappe',
     'trail.nextStage': 'Nächste Etappe',
     'trail.backToTrails': 'Zurück zu Allen Etappen',
+    'trail.allTrails': 'Alle Etappen',
     'trail.stage': 'Etappe',
+    'saint.allSaints': 'Alle Heiligen',
   },
 } as const;
