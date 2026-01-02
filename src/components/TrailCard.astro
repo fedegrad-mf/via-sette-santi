@@ -19,6 +19,7 @@ interface Props {
     difficulty: string;
     viewDetails: string;
     difficultyLabel: string;
+    stageLabel: string;
   };
 }
 
@@ -32,7 +33,7 @@ const { number, title, description, distance, duration, difficulty, image, link,
       <div class="card-image-overlay">
         <div class="trail-number-display">
           <div class="trail-number-large">{number}</div>
-          <div class="trail-number-label">Tappa {number} di 5</div>
+          <div class="trail-number-label">{translations.stageLabel.replace('{0}', String(number))}</div>
         </div>
       </div>
     </div>

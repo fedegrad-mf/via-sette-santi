@@ -30,6 +30,7 @@ export interface Props {
 		easy: string;
 		moderate: string;
 		hard: string;
+		stageLabel: string;
 	};
 }
 
@@ -76,7 +77,8 @@ const getDifficultyLabel = (difficulty: string): string => {
 						duration: translations.duration,
 						difficulty: translations.difficulty,
 						viewDetails: translations.viewDetails,
-						difficultyLabel: getDifficultyLabel(trail.data.difficulty)
+					difficultyLabel: getDifficultyLabel(trail.data.difficulty),
+					stageLabel: translations.stageLabel
 					}}
 				/>
 			))}

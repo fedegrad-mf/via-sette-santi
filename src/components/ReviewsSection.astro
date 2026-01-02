@@ -39,7 +39,7 @@ const { title, subtitle, reviews, class: className } = Astro.props;
 		</div>
 
 		<div class="content-wrapper-lg">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			<div class="grid-responsive">
 				{reviews.map((review) => (
 					<ReviewCard
 						name={review.name}

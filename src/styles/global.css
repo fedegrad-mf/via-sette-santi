@@ -159,10 +159,6 @@
    ============================================ */
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
   /* Container Utilities */
   .container-custom {
     width: 100%;
@@ -695,6 +691,40 @@
     border-radius: var(--radius-full);
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  /* Badge difficulty variants */
+  .badge-easy {
+    background-color: rgba(107, 143, 174, 0.15);
+    color: var(--color-accent-700);
+  }
+
+  @supports (color: rgb(from white r g b)) {
+    .badge-easy {
+      background-color: rgb(from var(--color-accent-500) r g b / 0.15);
+    }
+  }
+
+  .badge-moderate {
+    background-color: rgba(212, 175, 55, 0.15);
+    color: var(--color-gold-700);
+  }
+
+  @supports (color: rgb(from white r g b)) {
+    .badge-moderate {
+      background-color: rgb(from var(--color-gold-500) r g b / 0.15);
+    }
+  }
+
+  .badge-hard {
+    background-color: rgba(157, 109, 72, 0.15);
+    color: var(--color-secondary-700);
+  }
+
+  @supports (color: rgb(from white r g b)) {
+    .badge-hard {
+      background-color: rgb(from var(--color-secondary-500) r g b / 0.15);
+    }
   }
 
   /* Card footer layout */

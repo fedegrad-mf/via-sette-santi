@@ -244,26 +244,49 @@ import heroImage from '../assets/images/hero-1.jpg';
 ## Design System & Styling
 
 ### Core Principles
-- **Reusability First**: Always use utility classes from `src/styles/global.css` before creating custom CSS
-- **Consistency**: Maintain uniform spacing, colors, typography across the entire site
+- **Tailwind-First Approach**: Use Tailwind v4 utility classes as the primary styling method
+- **Custom Utilities for Semantics**: Use custom utilities only for semantic, reusable patterns (`.section`, `.card`, etc.)
+- **Consistency**: Maintain uniform spacing, colors, typography across the entire site using CSS custom properties
 - **Scalability**: Design system supports easy addition of new pages and features
-- **DRY**: Avoid duplicating styles; centralize in global utilities
-- **Performance**: Smaller CSS bundle through shared classes
+- **Performance**: Smaller CSS bundle through shared classes and Tailwind's optimization
 
 ### Styling Architecture
+- **Tailwind v4**: Using `@theme` directive in `global.css` for design tokens
 - `global.css` is imported in the base common layout `src/layouts/Base.astro`
-- All CSS variables defined in `@theme` block in `global.css`
-- Utility classes defined in `@layer utilities` in `global.css`
-- Component-specific styles only for truly unique styling needs
-- Use themes to customize look and feel and provide dark mode support
+- All design tokens (colors, spacing, typography) defined in `@theme` block
+- Custom semantic utilities defined in `@layer utilities` (`.section`, `.card`, `.container-custom`)
+- **When to use custom CSS**: Only for truly unique, component-specific styling that can't be achieved with Tailwind
+- Use CSS custom properties for theming (light/dark mode support)
 - Accessible design: follow WCAG guidelines
 - Responsive design: mobile-first approach
 
+### Styling Decision Tree
+
+**Use Tailwind classes for:**
+- Spacing: `mt-8`, `px-4`, `gap-6`, `py-12`
+- Layout: `flex`, `grid`, `grid-cols-3`, `items-center`
+- Typography: `text-lg`, `font-bold`, `leading-relaxed`
+- Colors: Use CSS variables with Tailwind: `bg-[var(--color-primary-600)]`
+- Responsive: `md:grid-cols-2`, `lg:px-8`
+- States: `hover:opacity-80`, `focus:outline-2`
+
+**Use custom utilities for:**
+- Semantic page sections: `.section`, `.section-header`
+- Reusable card patterns: `.card`, `.card-content`, `.card-link`
+- Complex container logic: `.container-custom` (handles safe areas)
+- Typography scales: `.section-title`, `.page-title` (font family + responsive sizing)
+- Component-specific patterns that repeat across the site
+
+**Browser Compatibility Note:**
+- Badge color styles use fallback syntax for older browsers
+- Modern `rgb(from ...)` syntax wrapped in `@supports` queries
+- Ensures compatibility back to 2021 browsers while leveraging new features
+
 ### Global Utility Classes
-**ALWAYS use these classes instead of creating custom CSS:**
+**ALWAYS check if Tailwind can handle it first, then use these semantic classes:**
 
 #### Layout & Container
-- `.container-custom` - Main site container (max-width: 1280px, responsive padding)
+- `.container-custom` - Main site container (max-width: 1280px, responsive padding, safe area support)
 - `.content-wrapper` - Text content wrapper (max-width: 800px)
 - `.content-wrapper-lg` - Larger content wrapper (max-width: 1200px)
 
