@@ -1,4 +1,5 @@
 ---
+order: 4
 name: Saint John at the Bridges
 church: Church of San Giovanni ai Ponti
 location: Near Amandola
@@ -6,5 +7,8 @@ description: Church dedicated to Saint John the Baptist, located near ancient br
 history: The Church of San Giovanni ai Ponti owes its name to its particular position near ancient bridges crossing the Tenna river. Saint John the Baptist is venerated here in symbolic relation to the river water. The church was a stopping point for travelers and pilgrims crossing the river.
 feastDay: June 24 - Nativity of Saint John the Baptist
 image: saint-giovanni-ponti.jpg
+coordinates:
+  lat: 42.9780
+  lng: 13.3480
 date: 2025-12-28
 ---

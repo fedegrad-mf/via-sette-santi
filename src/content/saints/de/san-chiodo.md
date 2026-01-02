@@ -1,4 +1,5 @@
 ---
+order: 6
 name: Heiliger Nagel
 church: Kirche San Chiodo
 location: Entlang der letzten Route nach San Ruffino
@@ -6,5 +7,8 @@ description: Der Reliquie des Heiligen Kreuzes gewidmete Kirche, symbolisch durc
 history: Die Kirche San Chiodo hat eine besondere Bezeichnung, die sich nicht auf einen Heiligen im eigentlichen Sinne bezieht, sondern auf eine Reliquie der Passion Christi - den Nagel der Kreuzigung. Diese Art der Widmung ist in Italien selten, aber nicht einzigartig, und zeugt von einer besonderen Verehrung der Instrumente der Passion. Die Kirche mittelalterlichen Ursprungs bewahrt wahrscheinlich eine Reliquie oder ein Bild des Heiligen Nagels.
 feastDay: 3. Mai - Auffindung des Heiligen Kreuzes
 image: saint-chiodo.jpg
+coordinates:
+  lat: 42.9860
+  lng: 13.3520
 date: 2025-12-28
 ---

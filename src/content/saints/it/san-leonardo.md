@@ -1,4 +1,5 @@
 ---
+order: 7
 name: San Leonardo
 church: Chiesa di San Leonardo
 location: Nel bosco, raggiungibile da Rubbiano
@@ -6,5 +7,8 @@ description: Chiesa isolata nel bosco dedicata a San Leonardo di Noblac, patrono
 history: La Chiesa di San Leonardo sorge in una posizione isolata nel cuore del bosco, raggiungibile solo a piedi da Rubbiano. San Leonardo di Noblac fu un eremita francese del VI secolo.
 feastDay: 6 novembre
 image: saint-leonardo.jpg
+coordinates:
+  lat: 42.9700
+  lng: 13.3300
 date: 2025-12-28
 ---

@@ -22,6 +22,7 @@ const trailsCollection = defineCollection({
 
 const saintsCollection = defineCollection({
   schema: z.object({
+    order: z.number(),
     name: z.string(),
     church: z.string(),
     location: z.string(),
@@ -29,6 +30,10 @@ const saintsCollection = defineCollection({
     history: z.string(),
     feastDay: z.string().optional(),
     image: z.string().optional(),
+    coordinates: z.object({
+      lat: z.number(),
+      lng: z.number()
+    }).optional(),
     date: z.date()
   })
 });

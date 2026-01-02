@@ -1,4 +1,5 @@
 ---
+order: 1
 name: Saint Ruffino
 church: Church of San Ruffino
 location: Near Amandola
@@ -6,6 +7,9 @@ description: Saint Ruffino, martyr venerated in the Tenna valley, is the saint w
 history: The Church of San Ruffino stands on a promontory overlooking the Tenna valley. According to tradition, Saint Ruffino was an early Christian martyr whose devotion spread particularly in this area of the Sibillini Mountains. The current church, of Romanesque origin, preserves architectural elements from the 12th century and represents an important example of mountain religious architecture. The place has been a pilgrimage destination for centuries and still maintains an atmosphere of deep spirituality.
 feastDay: August 11
 image: saint-ruffino.jpg
+coordinates:
+  lat: 42.9833
+  lng: 13.3500
 date: 2025-12-28
 ---
 
