@@ -63,7 +63,6 @@ const hostsCollection = defineCollection({
     }).optional(),
     image: z.string().optional(),
     priceRange: z.enum(['budget', 'moderate', 'premium']).optional(),
-    featured: z.boolean().default(false),
     date: z.date()
   })
 });

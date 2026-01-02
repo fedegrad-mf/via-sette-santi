@@ -15,7 +15,6 @@ social:
   instagram: "https://www.instagram.com/rifugiomontesibilla"
 image: "rifugio-monte-sibilla.jpg"
 priceRange: "budget"
-featured: false
 date: 2026-01-02
 ---
 

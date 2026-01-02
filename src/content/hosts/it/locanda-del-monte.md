@@ -16,7 +16,6 @@ social:
   instagram: "https://www.instagram.com/locandadelmonte"
 image: "locanda-del-monte.jpg"
 priceRange: "moderate"
-featured: true
 date: 2026-01-02
 ---
 
