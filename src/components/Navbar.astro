@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import ThemeToggle from "./ThemeToggle.astro";
+import LanguagePicker from "./LanguagePicker.astro";
 import { defaultLang, languages } from "../i18n/languages";
 import { useTranslations } from "../i18n/utils";
 
@@ -52,7 +52,7 @@ const t = useTranslations( (currentLang  ?? defaultLang) as keyof typeof languag
         <!-- Actions -->
         <div class="flex items-center gap-3">
           <div class="hidden md:block">
-            <ThemeToggle />
+            <LanguagePicker />
           </div>
           <button
             id="mobile-menu-toggle"
@@ -105,10 +105,10 @@ const t = useTranslations( (currentLang  ?? defaultLang) as keyof typeof languag
         >
         <a href="#" class="mobile-nav-link">{t('nav.contact')}</a>
         
-        <!-- Theme Toggle in mobile menu -->
+        <!-- Language Picker in mobile menu -->
         <div class="pt-2 border-t border-white/10">
           <div class="flex justify-center py-2">
-            <ThemeToggle />
+            <LanguagePicker />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import LanguagePicker from "../components/LanguagePicker.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 import Navbar from "../components/Navbar.astro";
 import { defaultLang, languages } from "../i18n/languages";
 import { getResourceRoute } from "../utils/path";
@@ -184,10 +184,10 @@ if (resourceRoute === "/")
             </ul>
           </div>
 
-          <!-- Language Picker -->
+          <!-- Theme Toggle -->
           <div class="footer-section">
-            <h3 class="footer-heading">Language</h3>
-            <LanguagePicker />
+            <h3 class="footer-heading">Theme</h3>
+            <ThemeToggle />
           </div>
         </div>
 

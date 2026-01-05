@@ -10,22 +10,20 @@ const baseUrl = import.meta.env.BASE_URL; // base path of the site
 const resourceRoute = getResourceRoute(Astro.url.pathname || "");
 ---
 
-<div class="language-picker">
+<div class="language-picker relative inline-flex items-center">
   <button
-    id="language-picker-button"
     type="button"
-    class="language-button"
+    class="language-button inline-flex items-center gap-2 px-3 py-2 bg-[var(--color-primary-700)] border-2 border-[var(--color-primary-800)] rounded-md cursor-pointer transition-all text-white text-[0.9375rem] hover:bg-[var(--color-primary-800)]"
     aria-label="Select language"
     aria-expanded="false"
   >
-    <span class="current-lang">
+    <span class="flex items-center gap-2">
       {languages[currentLang as keyof typeof languages]?.flag}
-      <span class="current-lang-label">
+      <span class="hidden sm:inline">
         {languages[currentLang as keyof typeof languages]?.label}
       </span>
     </span>
     <svg
-      id="language-chevron"
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
@@ -35,26 +33,26 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="chevron"
+      class="chevron transition-transform duration-200"
     >
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
   </button>
 
-  <div id="language-picker-menu" class="language-menu hidden">
-    <ul class="language-list">
+  <div class="language-menu hidden absolute top-[calc(100%+0.5rem)] left-1/2 -translate-x-1/2 min-w-[max(11rem,100%)] w-max bg-[var(--color-surface)] border-2 border-[var(--color-border)] rounded-lg shadow-md z-50 overflow-hidden">
+    <ul class="list-none m-0 p-2">
       {
         Object.entries(languages).map(([langKey, langObj]) => (
           <li>
             <a
               href={getRelativeLocaleUrl(langKey, resourceRoute)}
               class:list={[
-                "language-option",
-                { active: langKey === currentLang },
+                "flex items-center gap-3 px-3.5 py-3 text-[var(--color-text)] no-underline transition-all text-[0.9375rem] hover:bg-[var(--color-surface-hover)]",
+                langKey === currentLang && "bg-[var(--color-primary-300)] text-[var(--color-primary-700)] font-semibold border-l-[3px] border-[var(--color-primary-600)] pl-[calc(0.875rem-3px)]"
               ]}
             >
-              <span class="language-flag">{langObj.flag}</span>
-              <span class="language-label">{langObj.label}</span>
+              <span class="text-xl">{langObj.flag}</span>
+              <span class="flex-1">{langObj.label}</span>
               {langKey === currentLang && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +64,7 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="check-icon"
+                  class="text-[var(--color-accent-600)]"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
@@ -80,154 +78,87 @@ const resourceRoute = getResourceRoute(Astro.url.pathname || "");
 </div>
 
 <style>
-  .language-picker {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .language-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    background-color: var(--color-primary-700);
-    border: 2px solid var(--color-primary-800);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    color: white;
-    font-size: 0.9375rem;
-  }
-
-  .language-button:hover {
-    background-color: var(--color-primary-800);
-  }
-
-  .language-button:focus {
-    outline: 2px solid var(--color-gold-400);
-    outline-offset: 2px;
-  }
-
-  .current-lang {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .current-lang-label {
-    display: none;
-  }
-
-  @media (min-width: 640px) {
-    .current-lang-label {
-      display: inline;
-    }
-  }
-
-  .chevron {
-    transition: transform var(--transition-fast);
-  }
-
   .language-button[aria-expanded="true"] .chevron {
     transform: rotate(180deg);
-  }
-
-  .language-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: max(11rem, 100%);
-    width: max-content;
-    background-color: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    z-index: 50;
-    overflow: hidden;
-  }
-
-  .language-list {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem;
-  }
-
-  .language-option {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 0.875rem;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-    font-size: 0.9375rem;
-  }
-
-  .language-option:hover {
-    background-color: var(--color-surface-hover);
-  }
-
-  .language-option.active {
-    background-color: var(--color-primary-300);
-    color: var(--color-primary-700);
-    font-weight: 600;
-    border-left: 3px solid var(--color-primary-600);
-    padding-left: calc(0.875rem - 3px);
-  }
-
-  .language-flag {
-    font-size: 1.25rem;
-  }
-
-  .language-label {
-    flex: 1;
-  }
-
-  .check-icon {
-    color: var(--color-accent-600);
-  }
-
-  .hidden {
-    display: none;
   }
 </style>
 
 <script>
   /**
    * Language picker dropdown script
+   * Supports multiple instances on the same page (desktop and mobile)
    */
   function initLanguagePicker() {
-    const button = document.getElementById("language-picker-button");
-    const menu = document.getElementById("language-picker-menu");
+    const pickers = document.querySelectorAll(".language-picker");
 
-    if (!button || !menu) return;
+    pickers.forEach((picker) => {
+      const button = picker.querySelector(".language-button") as HTMLButtonElement;
+      const menu = picker.querySelector(".language-menu") as HTMLElement;
 
-    // Toggle menu
-    button.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isExpanded = button.getAttribute("aria-expanded") === "true";
-      button.setAttribute("aria-expanded", String(!isExpanded));
-      menu.classList.toggle("hidden");
+      if (!button || !menu) return;
+
+      // Remove existing listeners to prevent duplicates
+      const newButton = button.cloneNode(true) as HTMLButtonElement;
+      button.replaceWith(newButton);
+
+      // Toggle menu
+      newButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isExpanded = newButton.getAttribute("aria-expanded") === "true";
+        
+        // Close all other language pickers first
+        document.querySelectorAll(".language-picker").forEach((otherPicker) => {
+          if (otherPicker !== picker) {
+            const otherButton = otherPicker.querySelector(".language-button") as HTMLButtonElement;
+            const otherMenu = otherPicker.querySelector(".language-menu") as HTMLElement;
+            if (otherButton && otherMenu) {
+              otherButton.setAttribute("aria-expanded", "false");
+              otherMenu.classList.add("hidden");
+            }
+          }
+        });
+
+        // Toggle current picker
+        newButton.setAttribute("aria-expanded", String(!isExpanded));
+        menu.classList.toggle("hidden");
+      });
     });
 
     // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!button.contains(e.target as Node) && !menu.contains(e.target as Node)) {
-        button.setAttribute("aria-expanded", "false");
-        menu.classList.add("hidden");
-      }
-    });
+    const handleOutsideClick = (e: Event) => {
+      document.querySelectorAll(".language-picker").forEach((picker) => {
+        const button = picker.querySelector(".language-button") as HTMLButtonElement;
+        const menu = picker.querySelector(".language-menu") as HTMLElement;
+        
+        if (button && menu && !picker.contains(e.target as Node)) {
+          button.setAttribute("aria-expanded", "false");
+          menu.classList.add("hidden");
+        }
+      });
+    };
+
+    // Remove old listener and add new one
+    document.removeEventListener("click", handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     // Close menu on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
-        button.setAttribute("aria-expanded", "false");
-        menu.classList.add("hidden");
-        button.focus();
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".language-picker").forEach((picker) => {
+          const button = picker.querySelector(".language-button") as HTMLButtonElement;
+          const menu = picker.querySelector(".language-menu") as HTMLElement;
+          
+          if (button && menu && button.getAttribute("aria-expanded") === "true") {
+            button.setAttribute("aria-expanded", "false");
+            menu.classList.add("hidden");
+            button.focus();
+          }
+        });
       }
-    });
+    };
+
+    document.removeEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", handleEscape);
   }
 
   // Initialize on page load
