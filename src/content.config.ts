@@ -17,6 +17,7 @@ const trailsCollection = defineCollection({
     endPoint: z.string(),
     highlights: z.array(z.string()),
     image: z.string().optional(),
+    gpxFile: z.string().optional(),
     date: z.date()
   })
 });
