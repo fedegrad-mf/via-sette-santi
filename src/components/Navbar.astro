@@ -35,11 +35,11 @@ const t = useTranslations( (currentLang  ?? defaultLang) as keyof typeof languag
             class="nav-link">{t('nav.home')}</a
           >
           <a
-            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/#trails")}
+            href={getRelativeLocaleUrl(currentLang ?? defaultLang, '') + '#trails'}
             class="nav-link">{t('nav.trails')}</a
           >
           <a
-            href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/#saints")}
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, '') + '#saints'}
             class="nav-link">{t('nav.saints')}</a
           >
           <a
@@ -92,11 +92,11 @@ const t = useTranslations( (currentLang  ?? defaultLang) as keyof typeof languag
           class="mobile-nav-link">{t('nav.home')}</a
         >
         <a
-          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/#trails")}
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, '') + '#trails'}
           class="mobile-nav-link">{t('nav.trails')}</a
         >
         <a
-          href={getRelativeLocaleUrl(currentLang ?? defaultLang, "/#saints")}
+          href={getRelativeLocaleUrl(currentLang ?? defaultLang, '') + '#saints'}
           class="mobile-nav-link">{t('nav.saints')}</a
         >
         <a
