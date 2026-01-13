@@ -4,6 +4,8 @@
  * Displays a trail with its basic information
  */
 
+import { toWebP } from '../utils/image';
+
 interface Props {
   number: number;
   title: string;
@@ -29,7 +31,20 @@ const { number, title, description, distance, duration, difficulty, image, link,
 <article class="card">
   {image && (
     <div class="card-image">
-      <img src={`${import.meta.env.BASE_URL}images/trails/${image}`} alt={title} loading="lazy" />
+      <picture>
+        <source 
+          srcset={`${import.meta.env.BASE_URL}images/trails/${toWebP(image)}`} 
+          type="image/webp" 
+        />
+        <img 
+          src={`${import.meta.env.BASE_URL}images/trails/${image}`} 
+          alt={title} 
+          loading="lazy"
+          decoding="async"
+          width="800"
+          height="600"
+        />
+      </picture>
       <div class="card-image-overlay">
         <div class="trail-number-display">
           <div class="trail-number-large">{number}</div>

@@ -1,0 +1,29 @@
+# Cache control headers for static assets
+# Note: GitHub Pages may not respect these headers, but they're included for best practices.
+# For full cache control support, consider deploying to:
+# - Netlify (supports _headers file)
+# - Vercel (supports vercel.json config)
+# - Cloudflare Pages (supports _headers file)
+
+# Images - cache for 1 year (immutable content)
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS/JS - cache for 1 year (versioned with Astro)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages - short cache, must revalidate
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Root HTML
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Fonts - cache for 1 year
+*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+*.woff
+  Cache-Control: public, max-age=31536000, immutable
